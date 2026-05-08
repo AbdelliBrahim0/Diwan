@@ -1,0 +1,267 @@
+/* ─────────────────────────────────────────
+   Footer — Diwan Elite
+───────────────────────────────────────── */
+
+.footer {
+  position: relative;
+  background-color: #000;
+  color: #fff;
+  overflow: hidden;
+}
+
+/* ── Top ornament line ── */
+.footer-top-line {
+  position: relative;
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(196, 167, 125, 0.3) 30%,
+    #c4a77d 50%,
+    rgba(196, 167, 125, 0.3) 70%,
+    transparent 100%
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer-top-ornament {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #000;
+  padding: 0 12px;
+  animation: spin-slow 10s linear infinite;
+}
+
+@keyframes spin-slow {
+  from { transform: translate(-50%, -50%) rotate(0deg); }
+  to { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* ── Background glow ── */
+.footer-bg-glow {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 400px;
+  background: radial-gradient(ellipse at top, rgba(196, 167, 125, 0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ── Main container ── */
+.footer-container {
+  position: relative;
+  z-index: 2;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 80px 40px 60px;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 60px;
+}
+
+/* ── Brand block ── */
+.footer-logo {
+  height: 60px;
+  object-fit: contain;
+  filter: brightness(1.1);
+  margin-bottom: 20px;
+  display: block;
+}
+
+.footer-tagline {
+  font-family: 'Playfair Display', serif;
+  font-size: 14px;
+  font-weight: 400;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.5);
+  line-height: 1.8;
+  margin-bottom: 30px;
+}
+
+/* ── Social icons ── */
+.footer-social {
+  display: flex;
+  gap: 12px;
+}
+
+.social-link {
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(196, 167, 125, 0.2);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.4);
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.social-link:hover {
+  border-color: #c4a77d;
+  color: #c4a77d;
+  background: rgba(196, 167, 125, 0.08);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(196, 167, 125, 0.15);
+}
+
+/* ── Column titles ── */
+.footer-col-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.4em;
+  color: #c4a77d;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+  position: relative;
+  padding-bottom: 14px;
+}
+
+.footer-col-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 24px;
+  height: 1px;
+  background: #c4a77d;
+}
+
+/* ── Nav links ── */
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.footer-links a {
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.45);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+  padding-left: 0;
+  display: inline-block;
+}
+
+.footer-links a::before {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: #c4a77d;
+  transition: width 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: #fff;
+  padding-left: 6px;
+}
+
+.footer-links a:hover::before {
+  width: 100%;
+}
+
+/* ── Contact list ── */
+.footer-contact-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.footer-contact-list li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.footer-contact-list svg {
+  flex-shrink: 0;
+}
+
+/* ── Bottom bar ── */
+.footer-bottom {
+  position: relative;
+  z-index: 2;
+}
+
+.footer-bottom-line {
+  height: 1px;
+  background: linear-gradient(90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.06) 30%,
+    rgba(255, 255, 255, 0.06) 70%,
+    transparent 100%
+  );
+}
+
+.footer-bottom-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 40px;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.footer-copy,
+.footer-craft {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.2);
+  letter-spacing: 0.1em;
+}
+
+.footer-craft {
+  color: rgba(196, 167, 125, 0.3);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .footer-container {
+    grid-template-columns: 1fr 1fr;
+    gap: 50px 40px;
+  }
+}
+
+@media (max-width: 600px) {
+  .footer-container {
+    grid-template-columns: 1fr;
+    padding: 60px 24px 40px;
+    gap: 40px;
+  }
+
+  .footer-bottom-content {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+    padding: 20px 24px;
+  }
+
+  .footer-logo {
+    height: 50px;
+  }
+}
