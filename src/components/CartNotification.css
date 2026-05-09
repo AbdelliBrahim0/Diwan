@@ -1,0 +1,135 @@
+.cart-notif-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  pointer-events: none;
+}
+
+.cart-notif-content {
+  background: rgba(10, 10, 10, 0.95);
+  border: 1px solid rgba(196, 167, 125, 0.3);
+  padding: 50px 40px;
+  border-radius: 40px;
+  max-width: 450px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8),
+              0 0 40px rgba(196, 167, 125, 0.1) inset;
+  position: relative;
+  overflow: hidden;
+}
+
+.cart-notif-logo {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cart-notif-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 0 10px rgba(196, 167, 125, 0.3));
+}
+
+.cart-notif-text h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  color: #fff;
+  margin-bottom: 15px;
+  letter-spacing: 0.05em;
+}
+
+.cart-notif-text p {
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.6);
+  margin: 0;
+}
+
+.cart-notif-footer {
+  margin-top: 30px;
+  width: 100%;
+}
+
+.cart-notif-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #c4a77d, transparent);
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.mute-checkbox-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.4);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  pointer-events: auto;
+  user-select: none;
+}
+
+.mute-checkbox-container input {
+  display: none;
+}
+
+.checkmark {
+  width: 16px;
+  height: 16px;
+  border: 1px solid rgba(196, 167, 125, 0.5);
+  border-radius: 3px;
+  display: inline-block;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.mute-checkbox-container:hover .checkmark {
+  border-color: #c4a77d;
+  background: rgba(196, 167, 125, 0.1);
+}
+
+.mute-checkbox-container input:checked + .checkmark {
+  background: #c4a77d;
+  border-color: #c4a77d;
+}
+
+.mute-checkbox-container input:checked + .checkmark::after {
+  content: '✔';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #000;
+  font-size: 10px;
+}
+
+.mute-label {
+  transition: color 0.3s ease;
+}
+
+.mute-checkbox-container:hover .mute-label {
+  color: #c4a77d;
+}
+
+@media (max-width: 480px) {
+  .cart-notif-content {
+    padding: 40px 25px;
+  }
+  .cart-notif-text h3 {
+    font-size: 20px;
+  }
+}

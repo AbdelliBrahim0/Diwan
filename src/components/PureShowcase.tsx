@@ -13,37 +13,41 @@ import blouzaImg from '../assets/categorieAssets/blouza.png';
 import blouzaEnfantImg from '../assets/categorieAssets/blouza enfant.png';
 
 const CATEGORIES = [
-  { 
-    id: 'jebba', 
-    items: [jebbaImg, jebba2Img], 
-    title: 'JEBBA', 
+  {
+    id: 'jebba',
+    items: [jebbaImg, jebba2Img],
+    title: 'JEBBA',
     subtitle: "L'ESSENCE DU PATRIMOINE",
     serial: '01'
   },
-  { 
-    id: 'costume', 
-    items: [costumeImg, costumeEnfantImg], 
-    title: 'COSTUME', 
+  {
+    id: 'costume',
+    items: [costumeImg, costumeEnfantImg],
+    title: 'COSTUME',
     subtitle: 'ÉLÉGANCE CONTEMPORAINE',
     serial: '02'
   },
-  { 
-    id: 'dengri', 
-    items: [dengriImg, dengriEnfantImg], 
-    title: 'DENGRI', 
+  {
+    id: 'dengri',
+    items: [dengriImg, dengriEnfantImg],
+    title: 'DENGRI',
     subtitle: 'L\'ICÔNE AUTHENTIQUE',
     serial: '03'
   },
-  { 
-    id: 'farmla', 
-    items: [blouzaImg, blouzaEnfantImg], 
-    title: 'BLOUZA', 
+  {
+    id: 'farmla',
+    items: [blouzaImg, blouzaEnfantImg],
+    title: 'BLOUZA',
     subtitle: 'RAFFINEMENT TRADITIONNEL',
     serial: '04'
   }
 ];
 
-const PureShowcase: React.FC = () => {
+interface PureShowcaseProps {
+  onNavigate?: () => void;
+}
+
+const PureShowcase: React.FC<PureShowcaseProps> = ({ onNavigate }) => {
   const [index, setIndex] = useState(0);
 
   const next = () => setIndex((i) => (i + 1) % CATEGORIES.length);
@@ -65,7 +69,7 @@ const PureShowcase: React.FC = () => {
 
       <div className="visual-container">
         <AnimatePresence mode="wait">
-          <motion.div 
+          <motion.div
             key={CATEGORIES[index].id}
             className="showcase-content"
             initial={{ opacity: 0 }}
@@ -75,7 +79,7 @@ const PureShowcase: React.FC = () => {
           >
             {/* Creative Title Layer */}
             <div className="category-header">
-              <motion.div 
+              <motion.div
                 className="bg-title"
                 initial={{ y: 50, opacity: 0 }}
                 animate={{ y: 0, opacity: 0.1 }}
@@ -83,9 +87,9 @@ const PureShowcase: React.FC = () => {
               >
                 {CATEGORIES[index].title}
               </motion.div>
-              
+
               <div className="title-stack">
-                <motion.span 
+                <motion.span
                   className="serial-num"
                   initial={{ x: -20, opacity: 0 }}
                   animate={{ x: 0, opacity: 0.5 }}
@@ -93,7 +97,7 @@ const PureShowcase: React.FC = () => {
                 >
                   {CATEGORIES[index].serial}
                 </motion.span>
-                <motion.h2 
+                <motion.h2
                   className="main-title"
                   initial={{ y: 30, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
@@ -101,7 +105,7 @@ const PureShowcase: React.FC = () => {
                 >
                   {CATEGORIES[index].title}
                 </motion.h2>
-                <motion.p 
+                <motion.p
                   className="sub-title"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -112,7 +116,7 @@ const PureShowcase: React.FC = () => {
               </div>
             </div>
 
-            <motion.div 
+            <motion.div
               className="duo-display"
               initial={{ opacity: 0, scale: 0.9, y: 30 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -130,7 +134,7 @@ const PureShowcase: React.FC = () => {
         </AnimatePresence>
 
         <div className="category-action">
-          <button className="btn-category-consult">
+          <button className="btn-category-consult" onClick={() => onNavigate?.()}>
             Consulter les produits
           </button>
         </div>

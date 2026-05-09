@@ -1,52 +1,130 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './ProductGrid.css';
+import { API_URL } from '../lib/api';
 
-// Asset Imports
-import blouzaEnfantImg from '../assets/products/blouza enfant.png';
-import costumeEnfantImg from '../assets/products/costume enfant.png';
-import costumeImg from '../assets/products/costume.png';
-import dengriEnfantImg from '../assets/products/dengri enfant.png';
-import dengriImg from '../assets/products/dengri.png';
-import jebbaImg from '../assets/products/jebba.png';
-import jebba2Img from '../assets/products/jebba2.png';
+export const PRODUCTS = [];
 
-const PRODUCTS = [
-  { id: 1, name: 'Blouza Enfant', rent: '80', sell: '240', image: blouzaEnfantImg, desc: "Découvrez l'élégance intemporelle de cette Blouza pour enfant. Confectionnée avec des tissus de haute qualité, elle apporte une touche de noblesse traditionnelle aux plus jeunes." },
-  { id: 2, name: 'Costume', rent: '150', sell: '580', image: costumeImg, desc: "Un costume au design sophistiqué, taillé sur mesure pour sublimer votre allure. L'alliance parfaite entre le savoir-faire classique et la modernité audacieuse de Diwan Elite." },
-  { id: 3, name: 'Jebba Traditionnelle', rent: '120', sell: '450', image: jebbaImg, desc: "La Jebba traditionnelle incarne l'héritage authentique. Broderies minutieuses et coupe majestueuse, elle est la pièce maîtresse des grandes cérémonies." },
-  { id: 4, name: 'Dengri Authentique', rent: '60', sell: '180', image: dengriImg, desc: "Le Dengri, symbole de l'élégance brute et du caractère. Repensé avec des finitions premium, il offre un confort absolu tout en affirmant une identité forte." },
-  { id: 5, name: 'Costume Enfant', rent: '90', sell: '320', image: costumeEnfantImg, desc: "L'élégance n'attend pas le nombre des années. Ce costume pour enfant est conçu pour offrir prestance et aisance lors des moments les plus précieux." },
-  { id: 6, name: 'Jebba Royale', rent: '180', sell: '620', image: jebba2Img, desc: "Un chef-d'œuvre de l'artisanat. La Jebba Royale se distingue par ses finitions dorées et son tissu opulent, réservée aux occasions les plus grandioses." },
-];
+interface Product {
+  id: number;
+  name: string;
+  rental_price: number;
+  sale_price: number;
+  description: string;
+  img_url: string;
+  img_url2?: string | null;
+  is_available: boolean;
+  category_ids: number[];
+  subcategory_ids: number[];
+  collection_ids: number[];
+}
 
-const ProductGrid: React.FC = () => {
-  const [selectedProduct, setSelectedProduct] = useState<any>(null);
+interface DisplayProduct {
+  id: number;
+  name: string;
+  rent: string;
+  sell: string;
+  image: string;
+  desc: string;
+  category_ids?: number[];
+  subcategory_ids?: number[];
+  collection_ids?: number[];
+  is_available?: boolean;
+}
+
+interface ProductGridProps {
+  onNavigate?: () => void
+}
+
+const ProductGrid: React.FC<ProductGridProps> = ({ onNavigate }) => {
+  const [displayProducts, setDisplayProducts] = useState<DisplayProduct[]>([]);
+  const [selectedProduct, setSelectedProduct] = useState<DisplayProduct | null>(null);
   const [justAdded, setJustAdded] = useState<string | null>(null);
+  const [categories, setCategories] = useState<any[]>([]);
+  const [subcategories, setSubcategories] = useState<any[]>([]);
+  const [collections, setCollections] = useState<any[]>([]);
+
+  // Fetch products from API on mount
+  useEffect(() => {
+    void (async () => {
+      try {
+        const [productsRes, categoriesRes, subcategoriesRes, collectionsRes] = await Promise.all([
+          fetch(`${API_URL}/products`),
+          fetch(`${API_URL}/categories`),
+          fetch(`${API_URL}/subcategories`),
+          fetch(`${API_URL}/collections`),
+        ]);
+
+        const productsData = (productsRes.ok ? await productsRes.json() : []) as Product[];
+        const categoriesData = categoriesRes.ok ? await categoriesRes.json() : [];
+        const subcategoriesData = subcategoriesRes.ok ? await subcategoriesRes.json() : [];
+        const collectionsData = collectionsRes.ok ? await collectionsRes.json() : [];
+
+        setCategories(categoriesData);
+        setSubcategories(subcategoriesData);
+        setCollections(collectionsData);
+
+        // Convert and randomize products
+        let products: DisplayProduct[] = (productsData || [])
+          .filter((p: Product) => p.is_available)
+          .map((p: Product) => ({
+            id: p.id,
+            name: p.name,
+            rent: String(p.rental_price),
+            sell: String(p.sale_price),
+            image: p.img_url,
+            desc: p.description,
+            category_ids: p.category_ids,
+            subcategory_ids: p.subcategory_ids,
+            collection_ids: p.collection_ids,
+            is_available: p.is_available,
+          }));
+
+        // Shuffle randomly
+        products = products.sort(() => Math.random() - 0.5);
+
+        // Take first 6
+        setDisplayProducts(products.slice(0, 6));
+      } catch (error) {
+        console.error('Failed to fetch products:', error);
+        setDisplayProducts([]);
+      }
+    })();
+  }, []);
 
   const handleAddToCart = (product: any, type: 'rent' | 'sell') => {
-    const cart = JSON.parse(localStorage.getItem('diwan_cart') || '[]');
+    const cart = JSON.parse(localStorage.getItem('diwan_cart') || '[]') as any[];
     const price = type === 'rent' ? product.rent : product.sell;
+    const source = 'Catalogue';
     
-    const newItem = {
-      cartId: Date.now() + Math.random().toString(36).substring(2, 9),
-      productId: product.id,
-      name: product.name,
-      type: type,
-      price: price,
-      image: product.image
-    };
+    const existingIndex = cart.findIndex(item => 
+      item.productId === product.id && 
+      item.type === type && 
+      item.source === source
+    );
+
+    if (existingIndex > -1) {
+      cart[existingIndex].quantity += 1;
+    } else {
+      cart.push({
+        cartId: Date.now() + Math.random().toString(36).substring(2, 9),
+        productId: product.id,
+        name: product.name,
+        type: type,
+        price: price,
+        image: product.image,
+        quantity: 1,
+        source: source
+      });
+    }
     
-    cart.push(newItem);
     localStorage.setItem('diwan_cart', JSON.stringify(cart));
-    
-    // Dispatch custom event to notify Navbar
     window.dispatchEvent(new Event('cartUpdated'));
+    window.dispatchEvent(new Event('itemAddedToCart'));
 
     setJustAdded(type);
     setTimeout(() => {
       setJustAdded(null);
-      setSelectedProduct(null); // Close modal automatically after adding? Or let user close. Let's keep it open, just remove success state.
     }, 1500);
   };
 
@@ -71,7 +149,7 @@ const ProductGrid: React.FC = () => {
         </motion.div>
 
         <div className="creative-products-container">
-          {PRODUCTS.slice(0, 6).map((product, idx) => (
+          {displayProducts.map((product, idx) => (
             <motion.div 
               key={product.id}
               className="creative-card clickable"
@@ -124,7 +202,7 @@ const ProductGrid: React.FC = () => {
         </div>
 
         <div className="creative-footer">
-          <button className="btn-discover-all">
+          <button className="btn-discover-all" onClick={() => onNavigate?.() }>
             <span className="text">Consulter tout</span>
           </button>
         </div>
@@ -174,6 +252,43 @@ const ProductGrid: React.FC = () => {
 
                   <div className="modal-desc">
                     <p>{selectedProduct.desc}</p>
+                  </div>
+
+                  {/* Additional Info */}
+                  <div className="modal-info-section">
+                    {selectedProduct.category_ids && selectedProduct.category_ids.length > 0 && (
+                      <div className="info-item">
+                        <span className="info-label">Catégorie</span>
+                        <span className="info-value">
+                          {selectedProduct.category_ids
+                            .map((id) => categories.find((c) => c.id === id)?.name)
+                            .filter(Boolean)
+                            .join(', ')}
+                        </span>
+                      </div>
+                    )}
+                    {selectedProduct.subcategory_ids && selectedProduct.subcategory_ids.length > 0 && (
+                      <div className="info-item">
+                        <span className="info-label">Sous-catégorie</span>
+                        <span className="info-value">
+                          {selectedProduct.subcategory_ids
+                            .map((id) => subcategories.find((sc) => sc.id === id)?.name)
+                            .filter(Boolean)
+                            .join(', ')}
+                        </span>
+                      </div>
+                    )}
+                    {selectedProduct.collection_ids && selectedProduct.collection_ids.length > 0 && (
+                      <div className="info-item">
+                        <span className="info-label">Collection</span>
+                        <span className="info-value">
+                          {selectedProduct.collection_ids
+                            .map((id) => collections.find((col) => col.id === id)?.name)
+                            .filter(Boolean)
+                            .join(', ')}
+                        </span>
+                      </div>
+                    )}
                   </div>
 
                   <div className="modal-actions">

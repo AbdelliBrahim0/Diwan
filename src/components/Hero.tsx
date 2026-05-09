@@ -2,7 +2,11 @@ import React, { useState, useEffect } from 'react';
 import './Hero.css';
 import heroVideo from '../assets/hero.webm';
 
-const Hero: React.FC = () => {
+interface HeroProps {
+  onNavigate?: () => void;
+}
+
+const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
   const phrases = [
     "انت تختار واحنا نجيوك لباب الدار",
     "نقيسولك ونلبسوك على كيفك",
@@ -53,7 +57,13 @@ const Hero: React.FC = () => {
           </p>
         </div>
         <div className="hero-cta">
-          <a href="#collection" className="btn btn-primary">Explorer la Collection</a>
+          <button 
+            onClick={() => onNavigate?.()} 
+            className="btn btn-primary"
+            style={{ cursor: 'pointer' }}
+          >
+            Explorer la Collection
+          </button>
         </div>
       </div>
 

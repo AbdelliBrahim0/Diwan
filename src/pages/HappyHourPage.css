@@ -1,0 +1,1079 @@
+.happy-hour-page {
+  position: relative;
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top left, rgba(196, 167, 125, 0.12), transparent 34%),
+    radial-gradient(circle at right center, rgba(255, 255, 255, 0.04), transparent 28%),
+    #050505;
+  color: #fff;
+  overflow: hidden;
+  padding: 104px 16px 40px;
+}
+
+.happy-hour-noise {
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 120px 120px;
+  opacity: 0.2;
+  pointer-events: none;
+}
+
+.happy-hour-gradient {
+  position: absolute;
+  filter: blur(70px);
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.happy-hour-gradient-a {
+  top: -80px;
+  left: -80px;
+  width: 260px;
+  height: 260px;
+  background: rgba(196, 167, 125, 0.22);
+}
+
+.happy-hour-gradient-b {
+  right: -100px;
+  top: 180px;
+  width: 320px;
+  height: 320px;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.happy-hour-shell {
+  position: relative;
+  z-index: 2;
+  max-width: 1320px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.happy-hour-hero {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 24px;
+  align-items: stretch;
+}
+
+.happy-hour-hero-copy,
+.happy-hour-hero-panel,
+.happy-hour-featured,
+.happy-product-card,
+.happy-hour-loading,
+.happy-hour-empty,
+.happy-hour-alert {
+  border: 1px solid rgba(196, 167, 125, 0.16);
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.28);
+}
+
+.happy-hour-hero-copy {
+  border-radius: 28px;
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 18px;
+}
+
+.happy-hour-hero-copy.promo-ad {
+  padding: 0;
+  overflow: hidden;
+  background: none;
+  border: none;
+  box-shadow: none;
+}
+
+.happy-hour-ad-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 28px;
+  display: block;
+}
+
+.happy-hour-kicker,
+.section-heading span,
+.happy-product-topline span,
+.happy-hour-session-name,
+.happy-hour-timing span,
+.metric-card span,
+.happy-product-body p,
+.featured-copy p,
+.happy-hour-empty p {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.happy-hour-kicker,
+.section-heading span,
+.happy-product-topline span {
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  font-size: 11px;
+}
+
+.happy-hour-title,
+.section-heading h2,
+.happy-product-body h3 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 400;
+  line-height: 1.06;
+  margin: 0;
+}
+
+.happy-hour-title {
+  font-size: clamp(42px, 6vw, 82px);
+  max-width: 10ch;
+}
+
+.happy-hour-description {
+  max-width: 58ch;
+  color: rgba(255, 255, 255, 0.76);
+  line-height: 1.8;
+  margin: 0;
+}
+
+.happy-hour-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+.happy-hour-primary,
+.happy-hour-secondary,
+.happy-hour-empty button {
+  border-radius: 999px;
+  padding: 13px 24px;
+  border: 1px solid rgba(196, 167, 125, 0.26);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.happy-hour-primary {
+  background: linear-gradient(135deg, #c4a77d, #e6c99d);
+  color: #050505;
+}
+
+.happy-hour-secondary,
+.happy-hour-empty button {
+  background: rgba(255, 255, 255, 0.03);
+  color: #fff;
+}
+
+.happy-hour-primary:hover,
+.happy-hour-secondary:hover,
+.happy-hour-empty button:hover {
+  transform: translateY(-2px);
+  border-color: rgba(196, 167, 125, 0.55);
+  box-shadow: 0 12px 30px rgba(196, 167, 125, 0.18);
+}
+
+.happy-hour-hero-panel {
+  border-radius: 28px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.happy-hour-status-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.happy-hour-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 999px;
+  padding: 8px 14px;
+  background: rgba(196, 167, 125, 0.14);
+  color: #c4a77d;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.happy-hour-status.expired {
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.happy-hour-session-name {
+  font-size: 12px;
+  text-align: right;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.happy-hour-countdown {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.countdown-block {
+  border-radius: 20px;
+  padding: 18px 14px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  text-align: center;
+}
+
+.countdown-block span {
+  display: block;
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(30px, 4vw, 42px);
+  color: #c4a77d;
+}
+
+.countdown-block small {
+  display: block;
+  margin-top: 4px;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.happy-hour-timing {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.happy-hour-timing > div {
+  border-radius: 16px;
+  padding: 14px 16px;
+  background: rgba(196, 167, 125, 0.05);
+  border: 1px solid rgba(196, 167, 125, 0.12);
+}
+
+.happy-hour-timing span,
+.metric-card span {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.happy-hour-timing strong {
+  display: block;
+  font-size: 13px;
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+.happy-hour-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.metric-card {
+  border-radius: 18px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.metric-card strong {
+  display: block;
+  font-size: 22px;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.happy-hour-alert {
+  border-radius: 18px;
+  padding: 16px 18px;
+  color: #f7d9b9;
+}
+
+.happy-hour-loading {
+  border-radius: 24px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.loading-line {
+  height: 16px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.04), rgba(196, 167, 125, 0.16), rgba(255, 255, 255, 0.04));
+  background-size: 220% 100%;
+  animation: shimmer 1.5s infinite linear;
+}
+
+.loading-line.short {
+  width: 60%;
+}
+
+.section-heading {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.section-heading h2 {
+  font-size: clamp(28px, 4vw, 44px);
+}
+
+.happy-hour-featured {
+  border-radius: 28px;
+  padding: 28px;
+}
+
+.featured-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: center;
+}
+
+.featured-frame {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(0, 0, 0, 0.18));
+  border: 1px solid rgba(196, 167, 125, 0.18);
+  min-height: 360px;
+}
+
+.featured-frame img {
+  width: 100%;
+  height: 100%;
+  min-height: 360px;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+}
+
+.featured-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.featured-copy p {
+  line-height: 1.85;
+  margin: 0;
+}
+
+.featured-price-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.featured-price-row > div,
+.happy-product-prices > div {
+  border-radius: 18px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.featured-price-row span,
+.happy-product-prices span {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+  margin-bottom: 8px;
+}
+
+.featured-price-row strong,
+.happy-product-prices strong {
+  display: block;
+  font-size: 24px;
+  color: #c4a77d;
+  margin-bottom: 6px;
+}
+
+.featured-price-row small,
+.happy-product-prices small {
+  color: rgba(255, 255, 255, 0.45);
+  text-decoration: line-through;
+}
+
+.featured-badges {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.badge-soft {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 9px 14px;
+  background: rgba(196, 167, 125, 0.08);
+  border: 1px solid rgba(196, 167, 125, 0.16);
+  color: #f4ddbf;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+.happy-hour-empty {
+  border-radius: 20px;
+  padding: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.happy-hour-empty p {
+  margin: 0;
+}
+
+.happy-hour-grid-section {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.happy-hour-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.happy-product-card {
+  border-radius: 24px;
+  overflow: hidden;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.happy-product-image {
+  position: relative;
+  min-height: 280px;
+  padding: 18px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(0, 0, 0, 0.2));
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.happy-product-image img {
+  width: 100%;
+  height: 100%;
+  min-height: 244px;
+  object-fit: contain;
+  object-position: center;
+  display: block;
+}
+
+.happy-product-body {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.happy-product-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.happy-product-body h3 {
+  font-size: 24px;
+}
+
+.happy-product-body p {
+  margin: 0;
+  line-height: 1.7;
+  font-size: 14px;
+}
+
+.happy-product-prices {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -120% 0;
+  }
+
+  100% {
+    background-position: 120% 0;
+  }
+}
+
+@media (max-width: 1100px) {
+  .happy-hour-hero,
+  .featured-layout {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .happy-hour-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .happy-hour-page {
+    padding: 88px 10px 24px;
+  }
+
+  .happy-hour-shell {
+    gap: 18px;
+  }
+
+  .happy-hour-hero,
+  .featured-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .happy-hour-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .featured-price-row,
+  .happy-product-prices,
+  .happy-hour-metrics,
+  .happy-hour-timing,
+  .happy-hour-countdown {
+    grid-template-columns: 1fr;
+  }
+
+  .happy-hour-hero {
+    gap: 12px;
+  }
+
+  .happy-hour-hero-copy,
+  .happy-hour-hero-panel,
+  .happy-hour-featured {
+    padding: 18px;
+    border-radius: 20px;
+  }
+
+  .happy-hour-hero-copy {
+    gap: 12px;
+  }
+
+  .happy-hour-title {
+    font-size: 34px;
+    max-width: 11ch;
+  }
+
+  .happy-hour-description {
+    line-height: 1.65;
+    font-size: 14px;
+  }
+
+  .happy-hour-hero-panel {
+    gap: 14px;
+    margin-top: -80px; /* Ascend to overlap bottom of image */
+    width: 90%; /* Reduced width */
+    margin-left: auto;
+    margin-right: auto;
+    z-index: 10;
+    position: relative;
+  }
+
+  .happy-hour-status-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .happy-hour-session-name {
+    text-align: left;
+  }
+
+  .happy-hour-actions,
+  .featured-badges,
+  .happy-hour-empty {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .happy-hour-grid-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .happy-hour-hero {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .happy-hour-empty {
+    align-items: flex-start;
+  }
+
+  .featured-frame,
+  .featured-frame img,
+  .happy-product-image,
+  .happy-product-image img {
+    min-height: 180px;
+  }
+
+  .happy-product-image {
+    padding: 12px;
+  }
+
+  .happy-product-body {
+    padding: 14px;
+    gap: 10px;
+  }
+
+  .happy-product-body p {
+    font-size: 12px;
+    line-height: 1.6;
+  }
+}
+
+@media (max-width: 480px) {
+  .happy-hour-page {
+    padding: 82px 10px 20px;
+  }
+
+  .happy-hour-shell {
+    gap: 14px;
+  }
+
+  .happy-hour-kicker,
+  .section-heading span,
+  .happy-product-topline span {
+    letter-spacing: 0.18em;
+    font-size: 9px;
+  }
+
+  .happy-hour-title {
+    font-size: 28px;
+  }
+
+  .section-heading h2,
+  .happy-product-body h3 {
+    font-size: 19px;
+  }
+
+  .happy-hour-hero-copy,
+  .happy-hour-hero-panel,
+  .happy-hour-featured,
+  .happy-product-body {
+    padding: 12px;
+  }
+
+  .happy-hour-hero-copy {
+    gap: 10px;
+  }
+
+  .happy-hour-description {
+    font-size: 13px;
+    line-height: 1.55;
+  }
+
+  .happy-hour-hero-panel {
+    gap: 10px;
+    margin-top: -60px; /* Overlap maintained for small screens */
+    width: 94%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .happy-hour-status {
+    padding: 7px 12px;
+    font-size: 10px;
+  }
+
+  .happy-hour-session-name {
+    font-size: 10px;
+  }
+
+  .countdown-block {
+    padding: 10px 8px;
+    border-radius: 16px;
+  }
+
+  .countdown-block span {
+    font-size: 26px;
+  }
+
+  .countdown-block small {
+    font-size: 8px;
+    letter-spacing: 0.18em;
+  }
+
+  .happy-hour-timing > div,
+  .metric-card,
+  .featured-price-row > div,
+  .happy-product-prices > div {
+    padding: 12px;
+    border-radius: 14px;
+  }
+
+  .happy-hour-timing strong {
+    font-size: 12px;
+  }
+
+  .metric-card strong {
+    font-size: 18px;
+    margin-bottom: 6px;
+  }
+
+  .happy-hour-metrics {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .happy-hour-timing {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .happy-hour-countdown {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  .happy-hour-actions {
+    gap: 8px;
+  }
+
+  .countdown-block {
+    padding: 10px 8px;
+  }
+
+  .happy-hour-primary,
+  .happy-hour-secondary,
+  .happy-hour-empty button {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .featured-frame,
+  .featured-frame img,
+  .happy-product-image,
+  .happy-product-image img {
+    min-height: 140px;
+  }
+
+  .happy-hour-grid {
+    gap: 10px;
+  }
+
+  .happy-product-card {
+    border-radius: 18px;
+  }
+
+  .happy-product-body p {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .happy-product-prices {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .happy-product-prices > div {
+    padding: 12px;
+  }
+
+  .happy-product-prices strong {
+    font-size: 20px;
+  }
+
+  .happy-hour-featured {
+    display: block;
+    padding: 12px;
+  }
+
+  .featured-layout {
+    gap: 12px;
+  }
+
+  .featured-copy {
+    gap: 12px;
+  }
+
+  .featured-copy p {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .featured-price-row {
+    gap: 8px;
+  }
+
+  .featured-price-row strong {
+    font-size: 20px;
+  }
+}
+
+/* Shared Promo Modal Styles */
+.promo-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(12px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.promo-modal-content {
+  background: #0a0a0a;
+  border: 1px solid rgba(196, 167, 125, 0.2);
+  border-radius: 32px;
+  width: 100%;
+  max-width: 1000px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+}
+
+.promo-modal-close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #fff;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+
+.promo-modal-close:hover {
+  background: rgba(196, 167, 125, 0.2);
+  transform: rotate(90deg);
+}
+
+.promo-modal-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 40px;
+  padding: 40px;
+}
+
+.promo-modal-image {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(0, 0, 0, 0.2));
+  border-radius: 24px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.promo-modal-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.promo-modal-info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+}
+
+.promo-modal-kicker {
+  font-size: 12px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #c4a77d;
+}
+
+.promo-modal-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 42px;
+  color: #fff;
+  margin: 0;
+}
+
+.promo-modal-desc {
+  font-size: 16px;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+}
+
+.promo-modal-pricing {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+.promo-price-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 24px;
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.promo-price-card.gold {
+  background: rgba(196, 167, 125, 0.05);
+  border-color: rgba(196, 167, 125, 0.2);
+}
+
+.promo-price-card span {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.price-stack {
+  display: flex;
+  flex-direction: column;
+}
+
+.price-stack strong {
+  font-size: 28px;
+  color: #fff;
+}
+
+.promo-price-card.gold strong {
+  color: #c4a77d;
+}
+
+.price-stack small {
+  font-size: 14px;
+  text-decoration: line-through;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.promo-add-btn {
+  margin-top: 8px;
+  padding: 14px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  color: #fff;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.promo-add-btn.primary {
+  background: #c4a77d;
+  color: #050505;
+  border: none;
+}
+
+.promo-add-btn:hover {
+  transform: translateY(-2px);
+  border-color: #c4a77d;
+}
+
+.promo-add-btn.added {
+  background: #2ecc71;
+  color: #fff;
+  border-color: #2ecc71;
+}
+
+@media (max-width: 900px) {
+  .promo-modal-grid {
+    grid-template-columns: 1fr;
+    padding: 30px;
+    gap: 30px;
+  }
+  .promo-modal-info {
+    text-align: center;
+  }
+  .promo-modal-title {
+    font-size: 32px;
+  }
+}
+
+@media (max-width: 600px) {
+  .promo-modal-pricing {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Additional Promo Modal Details Styles */
+.promo-modal-details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+  margin: 10px 0;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.detail-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: #c4a77d;
+}
+
+.detail-value {
+  font-size: 14px;
+  color: #fff;
+}
+
+.size-chips {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.size-chip {
+  padding: 4px 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  font-size: 12px;
+  color: #fff;
+}
+
+.happy-product-card.clickable,
+.black-product-card.clickable {
+  cursor: pointer;
+}

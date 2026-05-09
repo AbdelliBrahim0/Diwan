@@ -39,6 +39,7 @@
   text-align: center;
   z-index: 10;
   animation: fadeInUp 1.2s ease-out;
+  margin-top: 40px; /* Slight push down for better visual balance with navbar */
 }
 
 .hero-title {
@@ -174,7 +175,32 @@
 }
 
 @media (max-width: 768px) {
+  .hero {
+    height: 100vh;
+  }
+
   .hero-content {
     padding: 0 20px;
+  }
+
+  .title-en {
+    font-size: clamp(40px, 15vw, 80px);
+    letter-spacing: 8px;
+  }
+
+  .title-ar {
+    font-size: clamp(50px, 18vw, 100px);
+  }
+
+  .hero-subtitle {
+    font-size: 16px;
+  }
+
+  .hero-subtitle.arabic {
+    font-size: 22px;
+  }
+
+  .scroll-indicator {
+    bottom: 20px;
   }
 }
