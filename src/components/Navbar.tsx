@@ -129,22 +129,22 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
     const whatsappNumber = "21655089122";
     const total = totalPrice;
     const dateStr = new Date().toLocaleString('fr-FR');
-    
+
     let message = `*⚜️ NOUVELLE COMMANDE DIWAN ELITE ⚜️*\n\n`;
     message += `📅 *Date:* ${dateStr}\n`;
-    
+
     message += `👤 *Client:* ${whatsappForm.firstName} ${whatsappForm.lastName}\n`;
     if (whatsappForm.phone) {
       message += `📞 *Tel (Contact):* ${whatsappForm.phone}\n`;
     }
     message += `📍 *Adresse:* ${whatsappForm.address}\n`;
-    
+
     message += `\n📦 *ARTICLES:*\n`;
-    
+
     cartItems.forEach(item => {
       const typeLabel = item.type === 'rent' ? 'Location' : 'Vente';
       const sourceLabel = item.source || 'Catalogue';
-      
+
       const priceDisplay = item.originalPrice && Number(item.originalPrice) > Number(item.price)
         ? `~${item.originalPrice} DT~ *${item.price} DT* (Remisé)`
         : `*${item.price} DT*`;
@@ -161,12 +161,12 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
       const disc = calculateDiscount();
       message += `\n🎁 *Code Promo:* ${appliedPromo.code} (-${disc} DT)\n`;
     }
-    
+
     message += `\n──────────────────\n`;
     message += `💰 *TOTAL À PAYER: ${total} DT*\n`;
     message += `──────────────────\n\n`;
     message += `Je souhaite confirmer ma commande. Voici mes coordonnées pour la livraison.`;
-    
+
     const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
     window.open(url, '_blank');
     setCheckoutStep('none');
@@ -272,7 +272,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-          <button 
+          <button
             className="nav-account-btn"
             onClick={() => onNavigate?.('auth')}
             title="Mon Compte"
@@ -284,8 +284,8 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
           </button>
 
           <div className="cart-wrapper">
-            <button 
-              className={`cart-btn-nav ${isAnimating ? 'pulse-cart' : ''}`} 
+            <button
+              className={`cart-btn-nav ${isAnimating ? 'pulse-cart' : ''}`}
               onClick={() => {
                 setCartOpen(!cartOpen);
                 setIsOpen(false);
@@ -320,7 +320,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
                   <button className="btn-close-cart" onClick={() => setCartOpen(false)}>×</button>
                 </div>
               </div>
-              
+
               {cartItems.length === 0 ? (
                 <div className="cart-empty">Votre panier est vide.</div>
               ) : (
@@ -353,9 +353,9 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
                   <div className="cart-dropdown-footer">
                     <div className="promo-section">
                       <div className="promo-input-group">
-                        <input 
-                          type="text" 
-                          placeholder="Code promo" 
+                        <input
+                          type="text"
+                          placeholder="Code promo"
                           value={promoCodeInput}
                           onChange={(e) => setPromoCodeInput(e.target.value.toUpperCase())}
                         />
@@ -387,8 +387,8 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
                         <span className="total-price">{totalPrice} DT</span>
                       </div>
                     </div>
-                    <button 
-                      className="btn-checkout" 
+                    <button
+                      className="btn-checkout"
                       onClick={handleCheckoutSelection}
                     >
                       Commander
@@ -399,8 +399,8 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
             </div>
           </div>
 
-          <button 
-            className={`menu-toggle ${isOpen ? 'active' : ''}`} 
+          <button
+            className={`menu-toggle ${isOpen ? 'active' : ''}`}
             onClick={() => {
               setIsOpen(!isOpen);
               setCartOpen(false);
@@ -415,8 +415,8 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
           </button>
         </div>
 
-        <div 
-          className={`nav-menu-overlay ${isOpen ? 'show' : ''}`} 
+        <div
+          className={`nav-menu-overlay ${isOpen ? 'show' : ''}`}
           onClick={() => setIsOpen(false)}
         />
 
@@ -458,21 +458,21 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
 
           <div className="nav-menu-footer">
             <img src={logo} alt="Diwan Logo" className="nav-menu-logo" />
-            <div className="nav-menu-copyright">© 2024 Diwan Elite</div>
+            <div className="nav-menu-copyright">© 2026 Diwan Elite</div>
           </div>
         </div>
 
         <AnimatePresence>
           {/* Checkout Selection Popup */}
           {checkoutStep === 'selection' && (
-            <motion.div 
+            <motion.div
               className="checkout-overlay"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setCheckoutStep('none')}
             >
-              <motion.div 
+              <motion.div
                 className="checkout-popup glass"
                 initial={{ scale: 0.9, opacity: 0, y: 20 }}
                 animate={{ scale: 1, opacity: 1, y: 0 }}
@@ -484,7 +484,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
                   <h3>Finaliser la commande</h3>
                   <p>L'expérience Diwan se poursuit avec votre mode de validation préféré.</p>
                 </div>
-                
+
                 <div className="checkout-options">
                   <button className="opt-btn account-opt" onClick={handleAccountCheckoutStart}>
                     <div className="opt-icon">
@@ -535,14 +535,14 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
 
           {/* Account Confirmation Popup */}
           {checkoutStep === 'confirm' && currentUser && (
-            <motion.div 
+            <motion.div
               className="checkout-overlay"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setCheckoutStep('none')}
             >
-              <motion.div 
+              <motion.div
                 className="checkout-popup glass confirm-popup"
                 initial={{ scale: 0.9, opacity: 0, y: 20 }}
                 animate={{ scale: 1, opacity: 1, y: 0 }}
@@ -554,7 +554,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
                   <h3>Détails de Livraison</h3>
                   <p>Veuillez confirmer vos coordonnées pour l'expédition de votre commande.</p>
                 </div>
-                
+
                 <div className="verification-details">
                   <div className="v-card">
                     <div className="v-item">
@@ -569,7 +569,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
                         <p>{currentUser.firstName} {currentUser.lastName}</p>
                       </div>
                     </div>
-                    
+
                     <div className="v-item">
                       <div className="v-icon">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -598,8 +598,8 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
                 </div>
 
                 <div className="v-actions">
-                  <button 
-                    className="btn-confirm-final" 
+                  <button
+                    className="btn-confirm-final"
                     onClick={handleFinalAccountCheckout}
                     disabled={isOrdering}
                   >
@@ -625,14 +625,14 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
           )}
           {/* WhatsApp Form Popup */}
           {checkoutStep === 'whatsapp_form' && (
-            <motion.div 
+            <motion.div
               className="checkout-overlay"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setCheckoutStep('none')}
             >
-              <motion.div 
+              <motion.div
                 className="checkout-popup glass whatsapp-form-popup"
                 initial={{ scale: 0.9, opacity: 0, y: 20 }}
                 animate={{ scale: 1, opacity: 1, y: 0 }}
@@ -644,44 +644,44 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
                   <h3>Vos Coordonnées</h3>
                   <p>Pour préparer votre message WhatsApp, veuillez remplir ces informations de livraison.</p>
                 </div>
-                
+
                 <div className="whatsapp-form">
                   <div className="form-row">
                     <div className="form-group">
                       <label>Prénom</label>
-                      <input 
-                        type="text" 
-                        value={whatsappForm.firstName} 
-                        onChange={(e) => setWhatsappForm({...whatsappForm, firstName: e.target.value})}
+                      <input
+                        type="text"
+                        value={whatsappForm.firstName}
+                        onChange={(e) => setWhatsappForm({ ...whatsappForm, firstName: e.target.value })}
                         placeholder="Ex: Amine"
                       />
                     </div>
                     <div className="form-group">
                       <label>Nom</label>
-                      <input 
-                        type="text" 
-                        value={whatsappForm.lastName} 
-                        onChange={(e) => setWhatsappForm({...whatsappForm, lastName: e.target.value})}
+                      <input
+                        type="text"
+                        value={whatsappForm.lastName}
+                        onChange={(e) => setWhatsappForm({ ...whatsappForm, lastName: e.target.value })}
                         placeholder="Ex: Ben Salem"
                       />
                     </div>
                   </div>
-                  
+
                   <div className="form-group">
                     <label>Numéro de téléphone (si différent de WhatsApp)</label>
-                    <input 
-                      type="tel" 
-                      value={whatsappForm.phone} 
-                      onChange={(e) => setWhatsappForm({...whatsappForm, phone: e.target.value})}
+                    <input
+                      type="tel"
+                      value={whatsappForm.phone}
+                      onChange={(e) => setWhatsappForm({ ...whatsappForm, phone: e.target.value })}
                       placeholder="Ex: 55 000 000"
                     />
                   </div>
-                  
+
                   <div className="form-group">
                     <label>Adresse de livraison complète</label>
-                    <textarea 
-                      value={whatsappForm.address} 
-                      onChange={(e) => setWhatsappForm({...whatsappForm, address: e.target.value})}
+                    <textarea
+                      value={whatsappForm.address}
+                      onChange={(e) => setWhatsappForm({ ...whatsappForm, address: e.target.value })}
                       placeholder="Rue, Ville, Code Postal..."
                       rows={3}
                     />
@@ -698,8 +698,8 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
                 </div>
 
                 <div className="v-actions">
-                  <button 
-                    className="btn-confirm-final whatsapp-final-btn" 
+                  <button
+                    className="btn-confirm-final whatsapp-final-btn"
                     onClick={handleFinalWhatsAppCheckout}
                     disabled={!whatsappForm.firstName || !whatsappForm.lastName || !whatsappForm.address}
                   >
@@ -716,14 +716,14 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
 
           {/* Success Popup */}
           {checkoutStep === 'success' && (
-            <motion.div 
+            <motion.div
               className="checkout-overlay"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setCheckoutStep('none')}
             >
-              <motion.div 
+              <motion.div
                 className="checkout-popup glass success-popup"
                 initial={{ scale: 0.8, opacity: 0, rotateY: 20 }}
                 animate={{ scale: 1, opacity: 1, rotateY: 0 }}
@@ -731,7 +731,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
                 onClick={(e) => e.stopPropagation()}
               >
                 <div className="success-icon-wrap">
-                  <motion.div 
+                  <motion.div
                     className="success-circle"
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
@@ -743,7 +743,7 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
                   </motion.div>
                   <div className="success-particles"></div>
                 </div>
-                
+
                 <div className="popup-header">
                   <h3>Commande Transmise</h3>
                   <p>Votre commande d'exception a bien été enregistrée dans notre univers.</p>
@@ -763,14 +763,14 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
 
           {/* Login Required Popup */}
           {checkoutStep === 'login_required' && (
-            <motion.div 
+            <motion.div
               className="checkout-overlay"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setCheckoutStep('none')}
             >
-              <motion.div 
+              <motion.div
                 className="checkout-popup glass login-req-popup"
                 initial={{ scale: 0.9, opacity: 0, y: 20 }}
                 animate={{ scale: 1, opacity: 1, y: 0 }}
