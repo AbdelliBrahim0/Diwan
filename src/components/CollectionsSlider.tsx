@@ -15,7 +15,7 @@ interface Collection {
 }
 
 interface CollectionsSliderProps {
-  onNavigate?: () => void;
+  onNavigate?: (collectionId?: number) => void;
 }
 
 const CollectionsSlider: React.FC<CollectionsSliderProps> = ({ onNavigate }) => {
@@ -104,7 +104,7 @@ const CollectionsSlider: React.FC<CollectionsSliderProps> = ({ onNavigate }) => 
 
                     <div className="card-footer">
                       <div className="card-divider" />
-                      <button className="btn-discover" onClick={onNavigate}>
+                      <button className="btn-discover" onClick={() => onNavigate?.(col.id)}>
                         <span>Explorer</span>
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                           <path d="M5 12h14M12 5l7 7-7 7" />

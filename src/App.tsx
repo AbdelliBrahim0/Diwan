@@ -18,13 +18,21 @@ import { useEffect, useState } from 'react';
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(() => localStorage.getItem('diwan_is_logged_in') === 'true');
   const [view, setView] = useState<'home' | 'products' | 'happyhour' | 'blackfriday' | 'auth' | 'profile'>('home')
+  const [selectedCollectionId, setSelectedCollectionId] = useState<number | null>(null);
 
-  const handleNavigate = (to: 'home' | 'products' | 'happyhour' | 'blackfriday' | 'auth' | 'profile') => {
+  const handleNavigate = (to: 'home' | 'products' | 'happyhour' | 'blackfriday' | 'auth' | 'profile', options?: { collectionId?: number }) => {
     let target = to;
     if (to === 'auth' && isLoggedIn) {
       target = 'profile';
     }
     
+    if (options?.collectionId) {
+      setSelectedCollectionId(options.collectionId);
+    } else if (target !== 'products') {
+      // Clear filter when navigating away from products or to products without a specific collection
+      setSelectedCollectionId(null);
+    }
+
     setView(target)
     const nextPath = target === 'products' ? '/catalog' : 
                      target === 'happyhour' ? '/happy-hour' : 
@@ -62,13 +70,16 @@ function App() {
             <Hero onNavigate={() => handleNavigate('products')} />
             <PureShowcase onNavigate={() => handleNavigate('products')} />
             <ProductGrid onNavigate={() => handleNavigate('products')} />
-            <CollectionsSlider onNavigate={() => handleNavigate('products')} />
+            <CollectionsSlider onNavigate={(id) => handleNavigate('products', { collectionId: id })} />
             <Gallery />
             <Experience />
             <Footer />
           </>
         ) : view === 'products' ? (
-          <ProductsPage onBack={() => handleNavigate('home')} />
+          <ProductsPage 
+            onBack={() => handleNavigate('home')} 
+            initialCollectionId={selectedCollectionId}
+          />
         ) : view === 'happyhour' ? (
           <HappyHourPage
             onBack={() => handleNavigate('home')}

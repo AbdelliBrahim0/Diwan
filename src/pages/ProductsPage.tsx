@@ -38,11 +38,12 @@ interface Collection {
 
 interface Props {
   onBack?: () => void;
+  initialCollectionId?: number | null;
 }
 
 
 
-export default function ProductsPage({ onBack }: Props) {
+export default function ProductsPage({ onBack, initialCollectionId }: Props) {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
@@ -138,6 +139,19 @@ export default function ProductsPage({ onBack }: Props) {
       setSelectedSubCategory(null);
     }
   }, [availableSubcategories, selectedSubCategory]);
+  
+  // Handle initial collection from homepage
+  useEffect(() => {
+    if (initialCollectionId) {
+      setSelectedCollection(initialCollectionId);
+      setShowFilters(true); // Open filters so user sees the active collection
+      
+      // Scroll to filters or results after a short delay for data to load
+      setTimeout(() => {
+        window.scrollTo({ top: 400, behavior: 'smooth' });
+      }, 500);
+    }
+  }, [initialCollectionId]);
 
   // Reset page when filters change
   useEffect(() => {
