@@ -13,7 +13,7 @@ import BlackFridayPage from './pages/BlackFridayPage';
 import AuthPage from './pages/AuthPage';
 import ProfilePage from './pages/ProfilePage';
 import CartNotification from './components/CartNotification';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(() => localStorage.getItem('diwan_is_logged_in') === 'true');
@@ -26,10 +26,9 @@ function App() {
       target = 'profile';
     }
     
-    if (options?.collectionId) {
-      setSelectedCollectionId(options.collectionId);
-    } else if (target !== 'products') {
-      // Clear filter when navigating away from products or to products without a specific collection
+    if (target === 'products') {
+      setSelectedCollectionId(options?.collectionId ?? null);
+    } else {
       setSelectedCollectionId(null);
     }
 

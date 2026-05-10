@@ -52,10 +52,10 @@ export default function ProductsPage({ onBack, initialCollectionId }: Props) {
   const [collections, setCollections] = useState<Collection[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
   const [selectedSubCategory, setSelectedSubCategory] = useState<number | null>(null);
-  const [selectedCollection, setSelectedCollection] = useState<number | null>(null);
+  const [selectedCollection, setSelectedCollection] = useState<number | null>(initialCollectionId || null);
   const [minPrice, setMinPrice] = useState<number | ''>('');
   const [maxPrice, setMaxPrice] = useState<number | ''>('');
-  const [showFilters, setShowFilters] = useState(false);
+  const [showFilters, setShowFilters] = useState(!!initialCollectionId);
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
@@ -140,18 +140,25 @@ export default function ProductsPage({ onBack, initialCollectionId }: Props) {
     }
   }, [availableSubcategories, selectedSubCategory]);
   
-  // Handle initial collection from homepage
   useEffect(() => {
-    if (initialCollectionId) {
-      setSelectedCollection(initialCollectionId);
-      setShowFilters(true); // Open filters so user sees the active collection
+    if (initialCollectionId !== null && initialCollectionId !== undefined) {
+      setSelectedCollection(Number(initialCollectionId));
+      setShowFilters(true);
       
-      // Scroll to filters or results after a short delay for data to load
       setTimeout(() => {
-        window.scrollTo({ top: 400, behavior: 'smooth' });
-      }, 500);
+        const resultsSection = document.querySelector('.catalog-results-head');
+        resultsSection?.scrollIntoView({ behavior: 'smooth' });
+      }, 600);
     }
   }, [initialCollectionId]);
+
+  useEffect(() => {
+    if (selectedCollection) {
+      console.log('Current selectedCollection filter:', selectedCollection);
+      const filteredCount = products.filter(p => p.collection_ids.includes(selectedCollection)).length;
+      console.log('Products matching this collection:', filteredCount);
+    }
+  }, [selectedCollection, products]);
 
   // Reset page when filters change
   useEffect(() => {
@@ -167,9 +174,9 @@ export default function ProductsPage({ onBack, initialCollectionId }: Props) {
         const haystack = [product.name, product.description].join(' ').toLowerCase();
         if (!haystack.includes(normalizedSearch)) return false;
       }
-      if (selectedCategory && !product.category_ids.includes(selectedCategory)) return false;
-      if (selectedSubCategory && !product.subcategory_ids.includes(selectedSubCategory)) return false;
-      if (selectedCollection && !product.collection_ids.includes(selectedCollection)) return false;
+      if (selectedCategory !== null && !product.category_ids.includes(selectedCategory)) return false;
+      if (selectedSubCategory !== null && !product.subcategory_ids.includes(selectedSubCategory)) return false;
+      if (selectedCollection !== null && !product.collection_ids.includes(selectedCollection)) return false;
       if (minPrice !== '' && product.sale_price < Number(minPrice)) return false;
       if (maxPrice !== '' && product.sale_price > Number(maxPrice)) return false;
       return true;
@@ -360,10 +367,6 @@ export default function ProductsPage({ onBack, initialCollectionId }: Props) {
             </div>
           ) : (
             paginatedProducts.map((product) => {
-              const productCategoryNames = product.category_ids
-                .map((id) => categories.find((category) => category.id === id)?.name)
-                .filter(Boolean)
-                .slice(0, 2) as string[];
               const productSubCategoryNames = product.subcategory_ids
                 .map((id) => subcategories.find((subcategory) => subcategory.id === id)?.name)
                 .filter(Boolean)
