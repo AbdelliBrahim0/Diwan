@@ -60,7 +60,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ onBack, onLogout, onUpdateSuc
   const handleSave = async () => {
     setSaving(true);
     const token = localStorage.getItem('diwan_auth_token');
-    
+
     try {
       const response = await fetch(`${API_URL}/users/me`, {
         method: 'PATCH',
@@ -107,11 +107,11 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ onBack, onLogout, onUpdateSuc
           <line x1="19" y1="12" x2="5" y2="12"></line>
           <polyline points="12 19 5 12 12 5"></polyline>
         </svg>
-        Retour
+
       </button>
 
       <div className="profile-container">
-        <motion.div 
+        <motion.div
           className="profile-card glass"
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -128,7 +128,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ onBack, onLogout, onUpdateSuc
           <div className="profile-details">
             <AnimatePresence mode="wait">
               {isEditing ? (
-                <motion.div 
+                <motion.div
                   key="edit-form"
                   className="edit-form-container"
                   initial={{ opacity: 0, y: 10 }}
@@ -137,36 +137,36 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ onBack, onLogout, onUpdateSuc
                 >
                   <div className="edit-group">
                     <label>Prénom</label>
-                    <input 
-                      type="text" 
-                      value={editForm.firstName} 
-                      onChange={(e) => setEditForm({...editForm, firstName: e.target.value})}
+                    <input
+                      type="text"
+                      value={editForm.firstName}
+                      onChange={(e) => setEditForm({ ...editForm, firstName: e.target.value })}
                     />
                   </div>
                   <div className="edit-group">
                     <label>Nom</label>
-                    <input 
-                      type="text" 
-                      value={editForm.lastName} 
-                      onChange={(e) => setEditForm({...editForm, lastName: e.target.value})}
+                    <input
+                      type="text"
+                      value={editForm.lastName}
+                      onChange={(e) => setEditForm({ ...editForm, lastName: e.target.value })}
                     />
                   </div>
                   <div className="edit-group">
                     <label>Téléphone</label>
-                    <input 
-                      type="text" 
-                      value={editForm.phone} 
-                      onChange={(e) => setEditForm({...editForm, phone: e.target.value})}
+                    <input
+                      type="text"
+                      value={editForm.phone}
+                      onChange={(e) => setEditForm({ ...editForm, phone: e.target.value })}
                     />
                   </div>
                   <div className="edit-group">
                     <label>Adresse de Livraison</label>
                     <div className="edit-address-wrapper">
-                      <textarea 
-                        value={editForm.address} 
-                        onChange={(e) => setEditForm({...editForm, address: e.target.value})}
+                      <textarea
+                        value={editForm.address}
+                        onChange={(e) => setEditForm({ ...editForm, address: e.target.value })}
                       />
-                      <button 
+                      <button
                         className={`btn-locate-small ${locating ? 'loading' : ''}`}
                         onClick={handleGetLocation}
                       >
@@ -176,7 +176,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ onBack, onLogout, onUpdateSuc
                   </div>
                 </motion.div>
               ) : (
-                <motion.div 
+                <motion.div
                   key="view-details"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -223,7 +223,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ onBack, onLogout, onUpdateSuc
           </div>
         </motion.div>
 
-        <motion.div 
+        <motion.div
           className="profile-orders glass"
           initial={{ opacity: 0, x: 30 }}
           animate={{ opacity: 1, x: 0 }}
