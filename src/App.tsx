@@ -3,6 +3,7 @@ import Hero from './components/Hero';
 import PureShowcase from './components/PureShowcase';
 import ProductGrid from './components/ProductGrid';
 import CollectionsSlider from './components/CollectionsSlider';
+import PacksSection from './components/PacksSection';
 import Gallery from './components/Gallery';
 import Experience from './components/Experience';
 import Footer from './components/Footer';
@@ -69,6 +70,7 @@ function App() {
             <Hero onNavigate={() => handleNavigate('products')} />
             <PureShowcase onNavigate={() => handleNavigate('products')} />
             <ProductGrid onNavigate={() => handleNavigate('products')} />
+            <PacksSection onNavigateToPack={(id) => console.log('Navigate to pack detail:', id)} />
             <CollectionsSlider onNavigate={(id) => handleNavigate('products', { collectionId: id })} />
             <Gallery />
             <Experience />

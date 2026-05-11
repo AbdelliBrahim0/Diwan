@@ -96,10 +96,10 @@ const ProductGrid: React.FC<ProductGridProps> = ({ onNavigate }) => {
     const cart = JSON.parse(localStorage.getItem('diwan_cart') || '[]') as any[];
     const price = type === 'rent' ? product.rent : product.sell;
     const source = 'Catalogue';
-    
-    const existingIndex = cart.findIndex(item => 
-      item.productId === product.id && 
-      item.type === type && 
+
+    const existingIndex = cart.findIndex(item =>
+      item.productId === product.id &&
+      item.type === type &&
       item.source === source
     );
 
@@ -117,7 +117,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ onNavigate }) => {
         source: source
       });
     }
-    
+
     localStorage.setItem('diwan_cart', JSON.stringify(cart));
     window.dispatchEvent(new Event('cartUpdated'));
     window.dispatchEvent(new Event('itemAddedToCart'));
@@ -131,7 +131,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ onNavigate }) => {
   return (
     <section className="creative-grid-section">
       <div className="container">
-        <motion.div 
+        <motion.div
           className="creative-header"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -150,7 +150,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ onNavigate }) => {
 
         <div className="creative-products-container">
           {displayProducts.map((product, idx) => (
-            <motion.div 
+            <motion.div
               key={product.id}
               className="creative-card clickable"
               onClick={() => setSelectedProduct(product)}
@@ -169,15 +169,12 @@ const ProductGrid: React.FC<ProductGridProps> = ({ onNavigate }) => {
                 <div className="card-image-box">
                   <div className="image-aura"></div>
                   <img src={product.image} alt={product.name} />
-                  <div className="action-overlay hint">
-                    <span className="discover-hint">Découvrir l'œuvre</span>
-                  </div>
                 </div>
 
                 <div className="card-details">
                   <span className="brand-tag">Diwan Elite</span>
                   <h3 className="creative-name">{product.name}</h3>
-                  
+
                   <div className="fancy-divider">
                     <div className="fancy-line"></div>
                     <div className="fancy-diamond"></div>
@@ -202,7 +199,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ onNavigate }) => {
         </div>
 
         <div className="creative-footer">
-          <button className="btn-discover-all" onClick={() => onNavigate?.() }>
+          <button className="btn-discover-all" onClick={() => onNavigate?.()}>
             <span className="text">Consulter tout</span>
           </button>
         </div>
@@ -211,14 +208,14 @@ const ProductGrid: React.FC<ProductGridProps> = ({ onNavigate }) => {
       {/* Product Modal */}
       <AnimatePresence>
         {selectedProduct && (
-          <motion.div 
+          <motion.div
             className="product-modal-overlay"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setSelectedProduct(null)}
           >
-            <motion.div 
+            <motion.div
               className="product-modal-content"
               initial={{ scale: 0.9, y: 30, opacity: 0 }}
               animate={{ scale: 1, y: 0, opacity: 1 }}
@@ -239,7 +236,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ onNavigate }) => {
                     <img src={selectedProduct.image} alt={selectedProduct.name} />
                   </div>
                 </div>
-                
+
                 <div className="modal-info-col">
                   <div className="modal-header">
                     <span className="modal-brand">Diwan Elite</span>
@@ -297,7 +294,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ onNavigate }) => {
                         <span className="action-label">Louer pour</span>
                         <span className="action-val">{selectedProduct.rent} <small>DT</small></span>
                       </div>
-                      <button 
+                      <button
                         className={`btn-modal-action ${justAdded === 'rent' ? 'success' : ''}`}
                         onClick={() => handleAddToCart(selectedProduct, 'rent')}
                       >
@@ -310,7 +307,7 @@ const ProductGrid: React.FC<ProductGridProps> = ({ onNavigate }) => {
                         <span className="action-label">Acquérir pour</span>
                         <span className="action-val gold">{selectedProduct.sell} <small>DT</small></span>
                       </div>
-                      <button 
+                      <button
                         className={`btn-modal-action primary ${justAdded === 'sell' ? 'success' : ''}`}
                         onClick={() => handleAddToCart(selectedProduct, 'sell')}
                       >
