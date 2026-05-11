@@ -26,7 +26,11 @@ interface Product {
   id: number;
   name: string;
   img_url: string;
+  description: string;
+  rental_price: number;
+  sale_price: number;
   category_ids: number[];
+  subcategory_ids: number[];
   collection_ids: number[];
 }
 
@@ -39,16 +43,23 @@ const PacksPage: React.FC<PacksPageProps> = ({ onBack, initialPackId }) => {
   const [packs, setPacks] = useState<Pack[]>([]);
   const [selectedPack, setSelectedPack] = useState<Pack | null>(null);
   const [allProducts, setAllProducts] = useState<Product[]>([]);
+  const [categories, setCategories] = useState<any[]>([]);
+  const [subcategories, setSubcategories] = useState<any[]>([]);
+  const [collections, setCollections] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentStep, setCurrentStep] = useState(0);
   const [selections, setSelections] = useState<Record<number, number[]>>({}); // compIdx -> productIds[]
+  const [selectedProductForModal, setSelectedProductForModal] = useState<Product | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [pRes, prRes] = await Promise.all([
+        const [pRes, prRes, catRes, subRes, colRes] = await Promise.all([
           fetch(`${API_URL}/packs`),
-          fetch(`${API_URL}/products`)
+          fetch(`${API_URL}/products`),
+          fetch(`${API_URL}/categories`),
+          fetch(`${API_URL}/subcategories`),
+          fetch(`${API_URL}/collections`)
         ]);
 
         if (pRes.ok) {
@@ -63,6 +74,9 @@ const PacksPage: React.FC<PacksPageProps> = ({ onBack, initialPackId }) => {
           }
         }
         if (prRes.ok) setAllProducts(await prRes.json());
+        if (catRes.ok) setCategories(await catRes.json());
+        if (subRes.ok) setSubcategories(await subRes.json());
+        if (colRes.ok) setCollections(await colRes.json());
       } catch (error) {
         console.error('Failed to fetch packs:', error);
       } finally {
@@ -194,7 +208,7 @@ const PacksPage: React.FC<PacksPageProps> = ({ onBack, initialPackId }) => {
             >
               <img src={p.image_url} alt={p.name} />
               <div className="mini-info">
-                <span className="name">{p.name}</span>
+                <span className="mini-pack-name">{p.name}</span>
                 <span className="price">{p.price} DT</span>
               </div>
             </button>
@@ -204,7 +218,7 @@ const PacksPage: React.FC<PacksPageProps> = ({ onBack, initialPackId }) => {
         {selectedPack && (
           <div className="current-pack-summary">
             <div className="summary-image">
-              <img src={selectedPack.image_url} alt={selectedPack.name} />
+              <img src={selectedPack.image_url} alt={selectedPack.name} className="pack-img-contain" />
             </div>
             <div className="summary-details">
               <h3>{selectedPack.name}</h3>
@@ -270,13 +284,24 @@ const PacksPage: React.FC<PacksPageProps> = ({ onBack, initialPackId }) => {
                     >
                       <div className="card-img-box">
                         <img src={product.img_url} alt={product.name} />
-                        {isSelected && (
+                        {isSelected && !isFixed && (
                           <div className="selected-overlay">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
                               <path d="M20 6L9 17l-5-5" />
                             </svg>
                           </div>
                         )}
+                        <button 
+                          className="btn-view-details"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            setSelectedProductForModal(product);
+                          }}
+                        >
+                          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                          </svg>
+                        </button>
                       </div>
                       <div className="card-info">
                         <span className="name">{product.name}</span>
@@ -318,6 +343,66 @@ const PacksPage: React.FC<PacksPageProps> = ({ onBack, initialPackId }) => {
           </div>
         </footer>
       </main>
+
+      {/* Product Details Modal */}
+      <AnimatePresence>
+        {selectedProductForModal && (
+          <motion.div
+            className="product-modal-overlay"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedProductForModal(null)}
+          >
+            <motion.div
+              className="product-modal-content"
+              initial={{ scale: 0.9, y: 30, opacity: 0 }}
+              animate={{ scale: 1, y: 0, opacity: 1 }}
+              exit={{ scale: 0.9, y: 30, opacity: 0 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button className="modal-close" onClick={() => setSelectedProductForModal(null)}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <path d="M18 6L6 18M6 6l12 12" />
+                </svg>
+              </button>
+
+              <div className="modal-grid">
+                <div className="modal-image-col">
+                  <div className="modal-image-wrapper">
+                    <img src={selectedProductForModal.img_url} alt={selectedProductForModal.name} />
+                  </div>
+                </div>
+                <div className="modal-info-col">
+                  <span className="modal-brand">Diwan Elite</span>
+                  <h2 className="modal-title">{selectedProductForModal.name}</h2>
+                  <div className="modal-desc">
+                    <p>{selectedProductForModal.description}</p>
+                  </div>
+                  <div className="modal-info-section">
+                    {selectedProductForModal.category_ids?.length > 0 && (
+                      <div className="info-item">
+                        <span className="info-label">Catégorie</span>
+                        <span className="info-value">
+                          {selectedProductForModal.category_ids.map(id => categories.find(c => c.id === id)?.name).join(', ')}
+                        </span>
+                      </div>
+                    )}
+                    {selectedProductForModal.collection_ids?.length > 0 && (
+                      <div className="info-item">
+                        <span className="info-label">Collection</span>
+                        <span className="info-value">
+                          {selectedProductForModal.collection_ids.map(id => collections.find(c => c.id === id)?.name).join(', ')}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
