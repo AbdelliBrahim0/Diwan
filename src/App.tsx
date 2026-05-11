@@ -13,15 +13,17 @@ import HappyHourPage from './pages/HappyHourPage';
 import BlackFridayPage from './pages/BlackFridayPage';
 import AuthPage from './pages/AuthPage';
 import ProfilePage from './pages/ProfilePage';
+import PacksPage from './pages/PacksPage';
 import CartNotification from './components/CartNotification';
 import { useState } from 'react';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(() => localStorage.getItem('diwan_is_logged_in') === 'true');
-  const [view, setView] = useState<'home' | 'products' | 'happyhour' | 'blackfriday' | 'auth' | 'profile'>('home')
+  const [view, setView] = useState<'home' | 'products' | 'happyhour' | 'blackfriday' | 'auth' | 'profile' | 'packs'>('home')
+  const [selectedPackId, setSelectedPackId] = useState<number | null>(null);
   const [selectedCollectionId, setSelectedCollectionId] = useState<number | null>(null);
 
-  const handleNavigate = (to: 'home' | 'products' | 'happyhour' | 'blackfriday' | 'auth' | 'profile', options?: { collectionId?: number }) => {
+  const handleNavigate = (to: 'home' | 'products' | 'happyhour' | 'blackfriday' | 'auth' | 'profile' | 'packs', options?: { collectionId?: number, packId?: number }) => {
     let target = to;
     if (to === 'auth' && isLoggedIn) {
       target = 'profile';
@@ -31,6 +33,12 @@ function App() {
       setSelectedCollectionId(options?.collectionId ?? null);
     } else {
       setSelectedCollectionId(null);
+    }
+
+    if (target === 'packs') {
+      setSelectedPackId(options?.packId ?? null);
+    } else {
+      setSelectedPackId(null);
     }
 
     setView(target)
@@ -70,7 +78,7 @@ function App() {
             <Hero onNavigate={() => handleNavigate('products')} />
             <PureShowcase onNavigate={() => handleNavigate('products')} />
             <ProductGrid onNavigate={() => handleNavigate('products')} />
-            <PacksSection onNavigateToPack={(id) => console.log('Navigate to pack detail:', id)} />
+            <PacksSection onNavigateToPack={(id) => handleNavigate('packs', { packId: id })} />
             <CollectionsSlider onNavigate={(id) => handleNavigate('products', { collectionId: id })} />
             <Gallery />
             <Experience />
@@ -93,6 +101,8 @@ function App() {
           />
         ) : view === 'auth' ? (
           <AuthPage onBack={() => handleNavigate('home')} onSuccess={handleLoginSuccess} />
+        ) : view === 'packs' ? (
+          <PacksPage onBack={() => handleNavigate('home')} initialPackId={selectedPackId} />
         ) : (
           <ProfilePage onBack={() => handleNavigate('home')} onLogout={handleLogout} />
         )}
