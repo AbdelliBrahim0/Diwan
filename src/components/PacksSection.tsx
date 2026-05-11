@@ -30,24 +30,27 @@ const PacksSection: React.FC<PacksSectionProps> = ({ onNavigateToPack }) => {
   const [packs, setPacks] = useState<Pack[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [allProducts, setAllProducts] = useState<any[]>([]);
+  const [categories, setCategories] = useState<any[]>([]);
+  const [collections, setCollections] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [packsRes, productsRes] = await Promise.all([
+        const [packsRes, productsRes, catsRes, collsRes] = await Promise.all([
           fetch(`${API_URL}/packs`),
-          fetch(`${API_URL}/products`)
+          fetch(`${API_URL}/products`),
+          fetch(`${API_URL}/categories`),
+          fetch(`${API_URL}/collections`)
         ]);
 
         if (packsRes.ok) {
           const packsData = await packsRes.json();
           setPacks(packsData.filter((p: Pack) => p.is_active));
         }
-
-        if (productsRes.ok) {
-          setAllProducts(await productsRes.json());
-        }
+        if (productsRes.ok) setAllProducts(await productsRes.json());
+        if (catsRes.ok) setCategories(await catsRes.json());
+        if (collsRes.ok) setCollections(await collsRes.json());
       } catch (error) {
         console.error('Failed to fetch packs data:', error);
       } finally {
@@ -58,12 +61,11 @@ const PacksSection: React.FC<PacksSectionProps> = ({ onNavigateToPack }) => {
     fetchData();
   }, []);
 
-  // Auto-play
   useEffect(() => {
     if (packs.length <= 1) return;
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % packs.length);
-    }, 8000);
+    }, 6000);
     return () => clearInterval(interval);
   }, [packs.length]);
 
@@ -71,162 +73,84 @@ const PacksSection: React.FC<PacksSectionProps> = ({ onNavigateToPack }) => {
 
   const currentPack = packs[currentIndex];
 
-  const getComponentProducts = (comp: PackComponent) => {
+  const getComponentName = (comp: PackComponent) => {
     if (comp.type === 'product') {
-      return allProducts.filter(p => p.id === comp.product_id);
+      return allProducts.find(p => p.id === comp.product_id)?.name || 'Produit';
     } else if (comp.type === 'category') {
-      return allProducts.filter(p => p.category_ids?.includes(comp.category_id));
+      return categories.find(c => c.id === comp.category_id)?.name || 'Catégorie';
     } else if (comp.type === 'collection') {
-      return allProducts.filter(p => p.collection_ids?.includes(comp.collection_id));
+      return collections.find(coll => coll.id === comp.collection_id)?.name || 'Collection';
     }
-    return [];
+    return '';
   };
 
   return (
     <section className="packs-experience">
-      <div className="section-decoration">
-        <div className="line-left"></div>
-        <div className="diamond-center"></div>
-        <div className="line-right"></div>
-      </div>
-
-      <div className="container overflow-hidden">
-        <motion.div 
-          className="packs-header"
-          initial={{ opacity: 0, scale: 0.9 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1 }}
-        >
-          <span className="gold-text-gradient uppercase tracking-[0.3em] text-xs font-bold mb-2 block">Offres Exclusives</span>
-          <h2 className="section-title">Les Packs Diwan</h2>
-          <div className="ornament-divider">
-            <div className="dot"></div>
-            <div className="line"></div>
-            <div className="dot"></div>
-          </div>
-        </motion.div>
-
+      <div className="container">
         <div className="packs-carousel-wrapper">
           <AnimatePresence mode="wait">
             <motion.div
               key={currentPack.id}
               className="pack-slide-inner"
-              initial={{ opacity: 0, x: 100 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -100 }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 1.05 }}
+              transition={{ duration: 0.6 }}
             >
               <div className="pack-grid">
-                {/* Visual Area */}
+                {/* Visual Area - Graphic Ad */}
                 <div className="pack-visual">
-                  <div className="visual-background">
-                    <div className="glow-orb"></div>
-                  </div>
                   <motion.div 
                     className="main-ad-image"
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ duration: 0.6 }}
+                    layoutId={`pack-img-${currentPack.id}`}
                   >
                     <img src={currentPack.image_url} alt={currentPack.name} />
-                    <div className="image-frame"></div>
+                    <div className="image-overlay-gold"></div>
+                    <div className="price-tag-minimal">
+                      <span>{currentPack.price} DT</span>
+                    </div>
                   </motion.div>
-                  
-                  <div className="price-badge-floating">
-                    <span className="label">Pack Complet</span>
-                    <span className="value">{currentPack.price} <small>DT</small></span>
-                  </div>
                 </div>
 
-                {/* Content Area */}
+                {/* Content Area - Fine & Luxe */}
                 <div className="pack-info-content">
-                  <motion.h3 
-                    className="pack-name"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.3 }}
-                  >
-                    {currentPack.name}
-                  </motion.h3>
-                  
-                  <motion.p 
-                    className="pack-description"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.4 }}
-                  >
-                    {currentPack.description}
-                  </motion.p>
+                  <div className="pack-label-luxury">Édition Limitée</div>
+                  <h3 className="pack-name-minimal">{currentPack.name}</h3>
+                  <p className="pack-desc-minimal">{currentPack.description}</p>
 
-                  <div className="composition-title">Composition du Pack</div>
-                  
-                  <div className="components-list">
-                    {currentPack.components.map((comp, idx) => {
-                      const compProducts = getComponentProducts(comp);
-                      return (
-                        <motion.div 
-                          key={idx}
-                          className="comp-item-card"
-                          initial={{ opacity: 0, x: 20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: 0.5 + idx * 0.1 }}
-                        >
-                          <div className="comp-info">
-                            <span className="comp-type-label">
-                              {comp.type === 'product' ? 'Produit fixe' : 
-                               comp.type === 'category' ? 'Au choix par catégorie' : 'Au choix par collection'}
-                            </span>
-                            <div className="comp-main-row">
-                              <span className="comp-qty">{comp.quantity}x</span>
-                              <span className="comp-name">
-                                {comp.type === 'product' ? compProducts[0]?.name : 
-                                 comp.type === 'category' ? 'Sélection de produits' : 'Articles de collection'}
-                              </span>
-                            </div>
-                          </div>
-
-                          {/* Mini Slider for choices */}
-                          {(comp.type === 'category' || comp.type === 'collection') && (
-                            <div className="mini-product-strip">
-                              <motion.div 
-                                className="strip-inner"
-                                animate={{ x: [0, -100, 0] }}
-                                transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                              >
-                                {compProducts.slice(0, 8).map((p, pIdx) => (
-                                  <div key={pIdx} className="mini-p-thumb">
-                                    <img src={p.img_url} alt={p.name} title={p.name} />
-                                  </div>
-                                ))}
-                              </motion.div>
-                            </div>
-                          )}
-                        </motion.div>
-                      );
-                    })}
+                  <div className="composition-minimal">
+                    <div className="comp-title-luxe">Inclus dans ce pack :</div>
+                    <div className="comp-items-wrapper">
+                      {currentPack.components.map((comp, idx) => (
+                        <div key={idx} className="comp-pill">
+                          <span className="comp-pill-qty">{comp.quantity}</span>
+                          <span className="comp-pill-name">{getComponentName(comp)}</span>
+                          {comp.type !== 'product' && <span className="comp-pill-choice">au choix</span>}
+                        </div>
+                      ))}
+                    </div>
                   </div>
 
-                  <motion.button 
-                    className="btn-pack-discover"
+                  <button 
+                    className="btn-luxe-discover"
                     onClick={() => onNavigateToPack?.(currentPack.id)}
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
                   >
-                    <span>Personnaliser mon Pack</span>
-                    <div className="btn-glow"></div>
-                  </motion.button>
+                    <span>Découvrir l'expérience</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+                      <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                  </button>
                 </div>
               </div>
             </motion.div>
           </AnimatePresence>
 
-          {/* Navigation Dots */}
           {packs.length > 1 && (
-            <div className="packs-nav-dots">
+            <div className="packs-pagination-minimal">
               {packs.map((_, idx) => (
                 <button
                   key={idx}
-                  className={`nav-dot ${idx === currentIndex ? 'active' : ''}`}
+                  className={`pag-dot ${idx === currentIndex ? 'active' : ''}`}
                   onClick={() => setCurrentIndex(idx)}
                 />
               ))}
