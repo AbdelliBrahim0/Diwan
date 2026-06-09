@@ -100,3 +100,37 @@ button {
   margin: 0 auto;
   padding: 0 20px;
 }
+
+/* Fixes for Light Mode Specific Regressions */
+html[data-theme='light'] .catalog-card,
+html[data-theme='light'] .creative-card {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+html[data-theme='light'] .catalog-card::before,
+html[data-theme='light'] .creative-card-inner::before {
+  border-color: rgba(0, 0, 0, 0.05);
+}
+
+html[data-theme='light'] .catalog-modal-prices div,
+html[data-theme='light'] .price-field input,
+html[data-theme='light'] .price-block {
+  border-color: rgba(0, 0, 0, 0.1) !important;
+  background: rgba(0, 0, 0, 0.02) !important;
+}
+
+html[data-theme='light'] .happy-hour-page,
+html[data-theme='light'] .black-friday-page {
+  --bg-main: #050505;
+  --secondary: #0d0d0d;
+  --text-main: #FFFFFF;
+  --text-muted: rgba(255, 255, 255, 0.7);
+  --glass: rgba(255, 255, 255, 0.03);
+  --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+html[data-theme='light'] .happy-hour-page .promo-modal-overlay,
+html[data-theme='light'] .black-friday-page .promo-modal-overlay {
+  background: rgba(0, 0, 0, 0.85);
+}

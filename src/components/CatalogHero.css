@@ -88,13 +88,13 @@
   line-height: 1.15;
   letter-spacing: 0.02em;
   margin: 0;
-  color: var(--text-main);
+  color: #FFFFFF;
 }
 
 .hero-subtitle-carousel {
   font-size: 16px;
   line-height: 1.7;
-  color: var(--text-muted);
+  color: rgba(255, 255, 255, 0.7);
   margin: 0;
   max-width: 520px;
 }
