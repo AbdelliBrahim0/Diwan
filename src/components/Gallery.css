@@ -5,7 +5,7 @@
 .gallery-section {
   position: relative;
   padding: 130px 0 100px;
-  background-color: #050505;
+  background-color: var(--bg-main);
   overflow: hidden;
   color: var(--text-main);
 }
@@ -209,7 +209,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  background: rgba(0,0,0,0.5);
+  background: var(--bg-main);
   backdrop-filter: blur(4px);
   border: 1px solid rgba(196,167,125,0.3);
   color: var(--text-muted);
@@ -364,7 +364,7 @@
 .strip-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.5);
+  background: var(--bg-main);
   transition: background 0.3s ease;
 }
 .strip-overlay.active { background: rgba(0,0,0,0.1); }
@@ -376,7 +376,7 @@
 .lightbox-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.92);
+  background: var(--bg-main);
   backdrop-filter: blur(16px);
   z-index: 5000;
   display: flex;
@@ -430,7 +430,7 @@
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(0,0,0,0.5);
+  background: var(--bg-main);
   border: 1px solid rgba(196,167,125,0.3);
   color: var(--text-main);
   width: 50px;

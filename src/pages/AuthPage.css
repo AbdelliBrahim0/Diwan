@@ -1,6 +1,6 @@
 .auth-page {
   min-height: 100vh;
-  background: #000;
+  background: var(--bg-main);
   display: flex;
   flex-direction: column;
   position: relative;

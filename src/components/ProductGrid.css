@@ -1,6 +1,6 @@
 .creative-grid-section {
   padding: 120px 0;
-  background-color: #050505;
+  background-color: var(--bg-main);
   background-image: radial-gradient(circle at center, rgba(196, 167, 125, 0.03) 0%, transparent 70%);
   color: var(--text-main);
   overflow-x: hidden;
@@ -94,7 +94,7 @@
 .creative-card:hover .creative-card-inner {
   transform: translateY(-15px);
   border-color: rgba(196, 167, 125, 0.4);
-  background: #0d0d0d;
+  background: var(--secondary);
   box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5),
               0 0 40px rgba(196, 167, 125, 0.05) inset;
 }
@@ -340,7 +340,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.85);
+  background: var(--bg-main);
   backdrop-filter: blur(15px);
   z-index: 2000;
   display: flex;
@@ -703,7 +703,7 @@
   .modal-close {
     top: 15px;
     right: 15px;
-    background: rgba(0, 0, 0, 0.5);
+    background: var(--bg-main);
     border-radius: 50%;
     padding: 5px;
   }

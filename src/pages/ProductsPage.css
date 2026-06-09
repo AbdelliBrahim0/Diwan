@@ -1,4 +1,4 @@
-.catalog-page{position:relative;overflow:hidden;background:#050505;color: var(--text-main);min-height:100vh}
+.catalog-page{position:relative;overflow:hidden;background: var(--bg-main);color: var(--text-main);min-height:100vh}
 .catalog-ambient{position:absolute;inset:auto;pointer-events:none;filter:blur(90px);opacity:.7}
 .catalog-ambient-one{width:36rem;height:36rem;top:-10rem;right:-8rem;background:radial-gradient(circle,rgba(196,167,125,.22) 0%,transparent 70%)}
 .catalog-ambient-two{width:28rem;height:28rem;bottom:10rem;left:-8rem;background:radial-gradient(circle,rgba(255,255,255,.07) 0%,transparent 70%)}
@@ -13,7 +13,7 @@
 .catalog-hero-stats strong{display:block;font-size:28px;font-weight:600;font-family:'Playfair Display',serif;color: var(--text-main)}
 .catalog-hero-stats span{font-size:12px;color: var(--text-muted)}
 .catalog-toolbar{margin-top:18px;display:grid;gap:12px;padding:14px;border-radius:18px;background:rgba(255,255,255,.03);border:1px solid rgba(196,167,125,.12)}
-.catalog-search{width:100%;border-radius:999px;border:1px solid rgba(196,167,125,.24);background:#0d0d0d;color: var(--text-main);padding:14px 18px;font-size:14px;outline:none}
+.catalog-search{width:100%;border-radius:999px;border:1px solid rgba(196,167,125,.24);background: var(--secondary);color: var(--text-main);padding:14px 18px;font-size:14px;outline:none}
 .catalog-search::placeholder{color: var(--text-muted)}
 .catalog-toolbar-actions{display:flex;gap:10px;flex-wrap:wrap}
 .catalog-filters-button,.catalog-reset{border-radius:999px;padding:12px 16px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;border:1px solid transparent;transition:all .25s ease}
@@ -33,7 +33,7 @@
 .filter-grid.prices{grid-template-columns:1fr 1fr}
 .price-field{display:grid;gap:8px}
 .price-field span{font-size:12px;color: var(--text-muted);text-transform:uppercase;letter-spacing:.2em}
-.price-field input{border-radius:14px;border:1px solid rgba(255,255,255,.12);background:#0d0d0d;color: var(--text-main);padding:12px 14px}
+.price-field input{border-radius:14px;border:1px solid rgba(255,255,255,.12);background: var(--secondary);color: var(--text-main);padding:12px 14px}
 .active-filters{display:flex;gap:8px;flex-wrap:wrap}
 .active-filters span{font-size:12px;color:#c4a77d;border:1px solid rgba(196,167,125,.2);border-radius:999px;padding:7px 10px;background:rgba(196,167,125,.06)}
 .catalog-results-head{margin-top:22px;display:flex;align-items:end;justify-content:space-between;gap:12px}

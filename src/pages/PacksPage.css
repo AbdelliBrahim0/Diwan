@@ -132,7 +132,7 @@
   aspect-ratio: 16/9;
   border-radius: 12px;
   overflow: hidden;
-  background: #000;
+  background: var(--bg-main);
   margin-bottom: 1.5rem;
 }
 
@@ -169,7 +169,7 @@
 .packs-customizer {
   flex: 1;
   padding: 4rem 6%;
-  background: radial-gradient(circle at top right, #111111 0%, #050505 100%);
+  background: radial-gradient(circle at top right, var(--secondary) 0%, var(--bg-main) 100%);
   display: flex;
   flex-direction: column;
   min-width: 0;
@@ -268,7 +268,7 @@
   aspect-ratio: 4/5;
   position: relative;
   overflow: hidden;
-  background: #000;
+  background: var(--bg-main);
 }
 
 .card-img-box img {
@@ -288,7 +288,7 @@
   right: 15px;
   width: 40px;
   height: 40px;
-  background: rgba(0, 0, 0, 0.6);
+  background: var(--bg-main);
   backdrop-filter: blur(8px);
   border: 1px solid var(--glass-border);
   color: var(--text-main);
@@ -376,7 +376,7 @@
 .product-modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.95);
+  background: var(--bg-main);
   backdrop-filter: blur(15px);
   z-index: 20000;
   display: flex;
@@ -419,7 +419,7 @@
 }
 
 .modal-image-wrapper {
-  background: #000;
+  background: var(--bg-main);
   aspect-ratio: 3/4;
 }
 

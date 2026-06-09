@@ -2,7 +2,7 @@
   position: relative;
   min-height: 90vh;
   padding: 120px 0;
-  background: #080808;
+  background: var(--bg-main);
   display: flex;
   align-items: center;
   overflow: hidden;
