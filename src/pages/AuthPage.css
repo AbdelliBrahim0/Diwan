@@ -14,7 +14,7 @@
   left: 40px;
   background: transparent;
   border: none;
-  color: #fff;
+  color: var(--text-main);
   display: flex;
   align-items: center;
   gap: 10px;
@@ -64,14 +64,14 @@
 .auth-header h2 {
   font-family: 'Playfair Display', serif;
   font-size: 32px;
-  color: #fff;
+  color: var(--text-main);
   margin-bottom: 10px;
 }
 
 .auth-header p {
   font-family: 'Inter', sans-serif;
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-muted);
 }
 
 .auth-error-msg {
@@ -113,11 +113,11 @@
 
 .form-group input, 
 .form-group textarea {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
   border-radius: 12px;
   padding: 15px 20px;
-  color: #fff;
+  color: var(--text-main);
   font-family: 'Inter', sans-serif;
   font-size: 14px;
   transition: all 0.3s ease;
@@ -172,7 +172,7 @@
 .btn-auth-submit {
   margin-top: 15px;
   background: #c4a77d;
-  color: #000;
+  color: var(--bg-main);
   border: none;
   border-radius: 15px;
   padding: 18px;
@@ -189,7 +189,7 @@
 }
 
 .btn-auth-submit:hover {
-  background: #fff;
+  background: var(--accent);
   transform: translateY(-2px);
 }
 
@@ -207,7 +207,7 @@
 .auth-footer p {
   font-family: 'Inter', sans-serif;
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-muted);
 }
 
 .btn-toggle-auth {
@@ -221,7 +221,7 @@
 }
 
 .btn-toggle-auth:hover {
-  color: #fff;
+  color: var(--text-main);
   text-decoration: underline;
 }
 
@@ -229,7 +229,7 @@
   width: 20px;
   height: 20px;
   border: 2px solid rgba(0, 0, 0, 0.1);
-  border-top: 2px solid #000;
+  border-top: 2px solid var(--bg-main);
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }

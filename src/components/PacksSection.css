@@ -49,7 +49,7 @@
   font-family: 'Playfair Display', serif;
   font-size: 25vw;
   font-weight: 900;
-  color: #fff;
+  color: var(--text-main);
   white-space: nowrap;
   pointer-events: none;
   z-index: -1;
@@ -82,7 +82,7 @@
   top: 10%;
   left: -40px;
   background: #c4a77d;
-  color: #000;
+  color: var(--bg-main);
   padding: 20px 30px;
   display: flex;
   align-items: baseline;
@@ -116,7 +116,7 @@
 .elegant-title {
   font-family: 'Playfair Display', serif;
   font-size: 4rem;
-  color: #fff;
+  color: var(--text-main);
   line-height: 1;
   margin-bottom: 30px;
   font-weight: 300;
@@ -124,7 +124,7 @@
 
 .elegant-desc {
   font-size: 1.1rem;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-muted);
   line-height: 1.8;
   max-width: 480px;
   margin-bottom: 50px;
@@ -171,12 +171,12 @@
 .num {
   font-family: 'Playfair Display', serif;
   font-size: 1.5rem;
-  color: #fff;
+  color: var(--text-main);
   width: 25px;
 }
 
 .item-name {
-  color: #fff;
+  color: var(--text-main);
   font-size: 0.95rem;
   letter-spacing: 1px;
 }
@@ -193,7 +193,7 @@
 .btn-explore-luxe {
   background: transparent;
   border: none;
-  color: #fff;
+  color: var(--text-main);
   font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 4px;
@@ -234,7 +234,7 @@
   display: flex;
   align-items: center;
   gap: 20px;
-  color: #fff;
+  color: var(--text-main);
   font-family: 'Playfair Display', serif;
 }
 
@@ -260,8 +260,8 @@
 
 .nav-btn {
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #fff;
+  border: 1px solid var(--glass-border);
+  color: var(--text-main);
   width: 50px;
   height: 50px;
   border-radius: 50%;

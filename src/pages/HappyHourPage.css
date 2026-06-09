@@ -5,7 +5,7 @@
     radial-gradient(circle at top left, rgba(196, 167, 125, 0.12), transparent 34%),
     radial-gradient(circle at right center, rgba(255, 255, 255, 0.04), transparent 28%),
     #050505;
-  color: #fff;
+  color: var(--text-main);
   overflow: hidden;
   padding: 104px 16px 40px;
 }
@@ -40,7 +40,7 @@
   top: 180px;
   width: 320px;
   height: 320px;
-  background: rgba(255, 255, 255, 0.07);
+  background: var(--glass);
 }
 
 .happy-hour-shell {
@@ -68,7 +68,7 @@
 .happy-hour-empty,
 .happy-hour-alert {
   border: 1px solid rgba(196, 167, 125, 0.16);
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--glass);
   backdrop-filter: blur(16px);
   box-shadow: 0 18px 48px rgba(0, 0, 0, 0.28);
 }
@@ -107,7 +107,7 @@
 .happy-product-body p,
 .featured-copy p,
 .happy-hour-empty p {
-  color: rgba(255, 255, 255, 0.72);
+  color: var(--text-muted);
 }
 
 .happy-hour-kicker,
@@ -134,7 +134,7 @@
 
 .happy-hour-description {
   max-width: 58ch;
-  color: rgba(255, 255, 255, 0.76);
+  color: var(--text-muted);
   line-height: 1.8;
   margin: 0;
 }
@@ -167,8 +167,8 @@
 
 .happy-hour-secondary,
 .happy-hour-empty button {
-  background: rgba(255, 255, 255, 0.03);
-  color: #fff;
+  background: var(--glass);
+  color: var(--text-main);
 }
 
 .happy-hour-primary:hover,
@@ -209,8 +209,8 @@
 }
 
 .happy-hour-status.expired {
-  background: rgba(255, 255, 255, 0.08);
-  color: rgba(255, 255, 255, 0.7);
+  background: var(--glass);
+  color: var(--text-muted);
 }
 
 .happy-hour-session-name {
@@ -229,8 +229,8 @@
 .countdown-block {
   border-radius: 20px;
   padding: 18px 14px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
   text-align: center;
 }
 
@@ -247,7 +247,7 @@
   font-size: 10px;
   letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.55);
+  color: var(--text-muted);
 }
 
 .happy-hour-timing {
@@ -288,14 +288,14 @@
 .metric-card {
   border-radius: 18px;
   padding: 16px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
 }
 
 .metric-card strong {
   display: block;
   font-size: 22px;
-  color: #fff;
+  color: var(--text-main);
   margin-bottom: 8px;
 }
 
@@ -387,8 +387,8 @@
 .happy-product-prices > div {
   border-radius: 18px;
   padding: 16px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
 }
 
 .featured-price-row span,
@@ -397,7 +397,7 @@
   font-size: 10px;
   letter-spacing: 0.24em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.55);
+  color: var(--text-muted);
   margin-bottom: 8px;
 }
 
@@ -411,7 +411,7 @@
 
 .featured-price-row small,
 .happy-product-prices small {
-  color: rgba(255, 255, 255, 0.45);
+  color: var(--text-muted);
   text-decoration: line-through;
 }
 
@@ -471,7 +471,7 @@
   min-height: 280px;
   padding: 18px;
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(0, 0, 0, 0.2));
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid var(--glass-border);
 }
 
 .happy-product-image img {
@@ -844,7 +844,7 @@
 }
 
 .promo-modal-content {
-  background: #0a0a0a;
+  background: var(--bg-main);
   border: 1px solid rgba(196, 167, 125, 0.2);
   border-radius: 32px;
   width: 100%;
@@ -859,9 +859,9 @@
   position: absolute;
   top: 24px;
   right: 24px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #fff;
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  color: var(--text-main);
   width: 44px;
   height: 44px;
   border-radius: 50%;
@@ -889,7 +889,7 @@
   background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(0, 0, 0, 0.2));
   border-radius: 24px;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--glass-border);
 }
 
 .promo-modal-image img {
@@ -916,14 +916,14 @@
 .promo-modal-title {
   font-family: 'Playfair Display', serif;
   font-size: 42px;
-  color: #fff;
+  color: var(--text-main);
   margin: 0;
 }
 
 .promo-modal-desc {
   font-size: 16px;
   line-height: 1.8;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--text-muted);
   margin: 0;
 }
 
@@ -935,8 +935,8 @@
 }
 
 .promo-price-card {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
   padding: 24px;
   border-radius: 24px;
   display: flex;
@@ -953,7 +953,7 @@
   font-size: 11px;
   text-transform: uppercase;
   letter-spacing: 0.15em;
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-muted);
 }
 
 .price-stack {
@@ -963,7 +963,7 @@
 
 .price-stack strong {
   font-size: 28px;
-  color: #fff;
+  color: var(--text-main);
 }
 
 .promo-price-card.gold strong {
@@ -973,16 +973,16 @@
 .price-stack small {
   font-size: 14px;
   text-decoration: line-through;
-  color: rgba(255, 255, 255, 0.3);
+  color: var(--text-muted);
 }
 
 .promo-add-btn {
   margin-top: 8px;
   padding: 14px;
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.05);
-  color: #fff;
+  border: 1px solid var(--glass-border);
+  background: var(--glass);
+  color: var(--text-main);
   font-weight: 700;
   text-transform: uppercase;
   font-size: 12px;
@@ -1003,7 +1003,7 @@
 
 .promo-add-btn.added {
   background: #2ecc71;
-  color: #fff;
+  color: var(--text-main);
   border-color: #2ecc71;
 }
 
@@ -1034,9 +1034,9 @@
   gap: 15px;
   margin: 10px 0;
   padding: 15px;
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--glass);
   border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--glass-border);
 }
 
 .detail-item {
@@ -1054,7 +1054,7 @@
 
 .detail-value {
   font-size: 14px;
-  color: #fff;
+  color: var(--text-main);
 }
 
 .size-chips {
@@ -1066,11 +1066,11 @@
 
 .size-chip {
   padding: 4px 10px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
   border-radius: 6px;
   font-size: 12px;
-  color: #fff;
+  color: var(--text-main);
 }
 
 .happy-product-card.clickable,

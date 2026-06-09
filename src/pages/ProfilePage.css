@@ -14,7 +14,7 @@
   left: 40px;
   background: transparent;
   border: none;
-  color: #fff;
+  color: var(--text-main);
   display: flex;
   align-items: center;
   gap: 10px;
@@ -61,14 +61,14 @@
   justify-content: center;
   font-family: 'Playfair Display', serif;
   font-size: 32px;
-  color: #000;
+  color: var(--bg-main);
   font-weight: 600;
 }
 
 .profile-header h2 {
   font-family: 'Playfair Display', serif;
   font-size: 24px;
-  color: #fff;
+  color: var(--text-main);
   margin-bottom: 5px;
 }
 
@@ -92,7 +92,7 @@
   font-size: 10px;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--text-muted);
   display: block;
   margin-bottom: 5px;
 }
@@ -100,7 +100,7 @@
 .detail-item p {
   font-family: 'Inter', sans-serif;
   font-size: 15px;
-  color: #fff;
+  color: var(--text-main);
   margin: 0;
 }
 
@@ -149,11 +149,11 @@
 
 .edit-group input, 
 .edit-group textarea {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
   border-radius: 10px;
   padding: 10px 15px;
-  color: #fff;
+  color: var(--text-main);
   font-family: 'Inter', sans-serif;
   font-size: 14px;
 }
@@ -193,12 +193,12 @@
 
 .btn-locate-small:hover {
   background: #c4a77d;
-  color: #000;
+  color: var(--bg-main);
 }
 
 .btn-save-profile {
   background: #c4a77d;
-  color: #000;
+  color: var(--bg-main);
   border: none;
   padding: 12px;
   border-radius: 12px;
@@ -210,13 +210,13 @@
 }
 
 .btn-save-profile:hover {
-  background: #fff;
+  background: var(--accent);
 }
 
 .btn-cancel-edit {
   background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-muted);
   padding: 12px;
   border-radius: 12px;
   font-family: 'Inter', sans-serif;
@@ -254,13 +254,13 @@
   padding: 40px;
   border-radius: 40px;
   background: rgba(15, 15, 15, 0.4);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--glass-border);
 }
 
 .profile-orders h3 {
   font-family: 'Playfair Display', serif;
   font-size: 20px;
-  color: #fff;
+  color: var(--text-main);
   margin-bottom: 30px;
 }
 
@@ -277,13 +277,13 @@
 .orders-empty p {
   font-family: 'Inter', sans-serif;
   font-size: 14px;
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--text-muted);
   max-width: 250px;
 }
 
 .btn-start-shopping {
   background: #c4a77d;
-  color: #000;
+  color: var(--bg-main);
   border: none;
   padding: 12px 30px;
   border-radius: 30px;
@@ -297,7 +297,7 @@
 }
 
 .btn-start-shopping:hover {
-  background: #fff;
+  background: var(--accent);
   transform: translateY(-2px);
 }
 

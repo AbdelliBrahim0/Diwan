@@ -43,7 +43,7 @@
 .cart-notif-text h3 {
   font-family: 'Playfair Display', serif;
   font-size: 24px;
-  color: #fff;
+  color: var(--text-main);
   margin-bottom: 15px;
   letter-spacing: 0.05em;
 }
@@ -52,7 +52,7 @@
   font-family: 'Inter', sans-serif;
   font-size: 14px;
   line-height: 1.6;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-muted);
   margin: 0;
 }
 
@@ -76,7 +76,7 @@
   cursor: pointer;
   font-family: 'Inter', sans-serif;
   font-size: 11px;
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.1em;
   pointer-events: auto;
@@ -113,7 +113,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color: #000;
+  color: var(--bg-main);
   font-size: 10px;
 }
 

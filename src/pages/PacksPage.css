@@ -2,9 +2,9 @@
   --diwan-gold: #c4a77d;
   --diwan-gold-soft: rgba(196, 167, 125, 0.15);
   --diwan-black: #050505;
-  --diwan-dark: #0a0a0a;
+  --diwan-dark: var(--bg-main);
   --diwan-glass: rgba(255, 255, 255, 0.03);
-  --diwan-border: rgba(255, 255, 255, 0.05);
+  --diwan-border: var(--glass-border);
   --navbar-height: 80px;
 }
 
@@ -15,7 +15,7 @@
   width: 100%;
   max-width: 100vw;
   background-color: var(--diwan-black);
-  color: #ffffff;
+  color: var(--text-main);
   font-family: 'Inter', sans-serif;
   margin-top: var(--navbar-height);
   position: relative;
@@ -45,7 +45,7 @@
   gap: 0.8rem;
   background: none;
   border: none;
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--text-muted);
   font-size: 0.8rem;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -110,7 +110,7 @@
   display: block;
   font-weight: 500;
   font-size: 0.95rem;
-  color: #fff;
+  color: var(--text-main);
   margin-bottom: 0.3rem;
 }
 
@@ -202,7 +202,7 @@
   width: 12px;
   height: 12px;
   border-radius: 50%;
-  background: #fff;
+  background: var(--accent);
   transition: all 0.4s ease;
 }
 
@@ -231,7 +231,7 @@
 }
 
 .instruction-sub {
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--text-muted);
   font-size: 1rem;
 }
 
@@ -254,9 +254,9 @@
 }
 
 .selection-card:hover {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--glass);
   transform: translateY(-8px);
-  border-color: rgba(255, 255, 255, 0.1);
+  border-color: var(--glass-border);
 }
 
 .selection-card.selected {
@@ -290,8 +290,8 @@
   height: 40px;
   background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #fff;
+  border: 1px solid var(--glass-border);
+  color: var(--text-main);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -303,7 +303,7 @@
 
 .btn-view-details:hover {
   background: var(--diwan-gold);
-  color: #000;
+  color: var(--bg-main);
 }
 
 .selected-overlay {
@@ -340,7 +340,7 @@
 .btn-prev-step {
   background: transparent;
   border: 1px solid var(--diwan-border);
-  color: #fff;
+  color: var(--text-main);
   padding: 1rem 2.5rem;
   border-radius: 8px;
   font-size: 0.8rem;
@@ -351,7 +351,7 @@
 
 .btn-next-step, .btn-finish-pack {
   background: var(--diwan-gold);
-  color: #000;
+  color: var(--bg-main);
   border: none;
   padding: 1rem 3rem;
   border-radius: 8px;
@@ -368,7 +368,7 @@
 }
 
 .btn-next-step:not(:disabled):hover {
-  background: #fff;
+  background: var(--accent);
   transform: translateY(-2px);
 }
 
@@ -404,7 +404,7 @@
   height: 44px;
   background: var(--diwan-glass);
   border: 1px solid var(--diwan-border);
-  color: #fff;
+  color: var(--text-main);
   border-radius: 50%;
   cursor: pointer;
   z-index: 10;
@@ -451,7 +451,7 @@
 }
 
 .modal-desc {
-  color: rgba(255, 255, 255, 0.5);
+  color: var(--text-muted);
   line-height: 1.8;
   margin-bottom: 3rem;
 }
@@ -464,7 +464,7 @@
 }
 
 .info-label {
-  color: rgba(255, 255, 255, 0.3);
+  color: var(--text-muted);
   font-size: 0.8rem;
   text-transform: uppercase;
 }
@@ -543,7 +543,7 @@
 
 .btn-back-catalog {
   background: var(--diwan-gold);
-  color: #000;
+  color: var(--bg-main);
   border: none;
   padding: 1.2rem 2.5rem;
   border-radius: 8px;

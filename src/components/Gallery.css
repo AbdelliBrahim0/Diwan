@@ -7,7 +7,7 @@
   padding: 130px 0 100px;
   background-color: #050505;
   overflow: hidden;
-  color: #fff;
+  color: var(--text-main);
 }
 
 /* ── Background decor ── */
@@ -108,7 +108,7 @@
   font-family: 'Inter', sans-serif;
   font-size: 13px;
   font-weight: 300;
-  color: rgba(255, 255, 255, 0.4);
+  color: var(--text-muted);
   letter-spacing: 0.1em;
   margin: 0;
 }
@@ -212,7 +212,7 @@
   background: rgba(0,0,0,0.5);
   backdrop-filter: blur(4px);
   border: 1px solid rgba(196,167,125,0.3);
-  color: rgba(255,255,255,0.7);
+  color: var(--text-muted);
   padding: 8px 14px;
   font-family: 'Inter', sans-serif;
   font-size: 10px;
@@ -236,7 +236,7 @@
   left: 0;
   width: 100%;
   height: 2px;
-  background: rgba(255,255,255,0.05);
+  background: var(--glass);
   z-index: 10;
 }
 .slide-progress-fill {
@@ -291,7 +291,7 @@
   align-items: center;
   justify-content: center;
   font-size: 24px;
-  color: rgba(255,255,255,0.3);
+  color: var(--text-muted);
   font-weight: 200;
   transition: color 0.4s ease, transform 0.4s ease;
 }
@@ -335,7 +335,7 @@
 
 .gallery-strip::-webkit-scrollbar { height: 3px; }
 .gallery-strip::-webkit-scrollbar-thumb { background: #c4a77d; }
-.gallery-strip::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); }
+.gallery-strip::-webkit-scrollbar-track { background: var(--glass); }
 
 .strip-thumb {
   position: relative;
@@ -409,7 +409,7 @@
   right: 0;
   background: transparent;
   border: 1px solid rgba(255,255,255,0.2);
-  color: #fff;
+  color: var(--text-main);
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -432,7 +432,7 @@
   transform: translateY(-50%);
   background: rgba(0,0,0,0.5);
   border: 1px solid rgba(196,167,125,0.3);
-  color: #fff;
+  color: var(--text-main);
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -459,7 +459,7 @@
   transform: translateX(-50%);
   font-family: 'Inter', sans-serif;
   font-size: 12px;
-  color: rgba(255,255,255,0.4);
+  color: var(--text-muted);
   letter-spacing: 0.2em;
 }
 

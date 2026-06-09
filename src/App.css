@@ -2,7 +2,7 @@
   position: relative;
   width: 100%;
   min-height: 100vh;
-  background-color: #0A0A0A;
+  background-color: var(--bg-main);
 }
 
 main {

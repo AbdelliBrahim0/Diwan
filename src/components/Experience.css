@@ -2,7 +2,7 @@
   position: relative;
   padding: 150px 0;
   background-color: #030303;
-  color: #fff;
+  color: var(--text-main);
   overflow: hidden;
 }
 
@@ -81,7 +81,7 @@
   transform: translateX(-50%);
   width: 2px;
   height: 100%;
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--glass);
 }
 
 .timeline-fill {
@@ -141,7 +141,7 @@
 
 /* Glass Panel Card */
 .glass-panel {
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--glass);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(196, 167, 125, 0.15);
   padding: 50px 40px;
@@ -150,7 +150,7 @@
 }
 
 .glass-panel:hover {
-  background: rgba(255, 255, 255, 0.04);
+  background: var(--glass);
   border-color: rgba(196, 167, 125, 0.4);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4),
               0 0 30px rgba(196, 167, 125, 0.05) inset;
@@ -217,7 +217,7 @@
   font-family: 'Playfair Display', serif;
   font-size: 28px;
   font-weight: 400;
-  color: #fff;
+  color: var(--text-main);
   margin: 0 0 10px 0;
   position: relative;
   z-index: 1;
@@ -239,7 +239,7 @@
   font-size: 14px;
   font-weight: 300;
   line-height: 1.8;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-muted);
   margin: 0;
   position: relative;
   z-index: 1;
