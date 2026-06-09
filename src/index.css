@@ -31,6 +31,17 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+html[data-theme='light'] {
+  --secondary: #FFFFFF;
+  --accent: #1A1A1A;
+  --text-main: #1A1A1A;
+  --text-muted: rgba(0, 0, 0, 0.6);
+  --bg-main: #FDFBF7;
+  
+  --glass: rgba(0, 0, 0, 0.03);
+  --glass-border: rgba(0, 0, 0, 0.1);
+}
+
 * {
   margin: 0;
   padding: 0;
