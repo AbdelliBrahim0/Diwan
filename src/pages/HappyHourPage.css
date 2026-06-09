@@ -1077,3 +1077,55 @@
 .black-product-card.clickable {
   cursor: pointer;
 }
+
+/* LIGHT MODE: Golden Hour Aesthetic */
+html[data-theme='light'] .happy-hour-page {
+  background:
+    radial-gradient(circle at top left, rgba(196, 167, 125, 0.15), transparent 40%),
+    radial-gradient(circle at right center, rgba(255, 255, 255, 0.8), transparent 30%),
+    var(--bg-main);
+}
+
+html[data-theme='light'] .happy-hour-gradient-a {
+  background: rgba(196, 167, 125, 0.4);
+}
+
+html[data-theme='light'] .happy-hour-gradient-b {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+html[data-theme='light'] .happy-hour-noise {
+  opacity: 0.05;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
+}
+
+html[data-theme='light'] .happy-hour-hero-copy,
+html[data-theme='light'] .happy-hour-hero-panel,
+html[data-theme='light'] .happy-hour-featured,
+html[data-theme='light'] .happy-product-card,
+html[data-theme='light'] .happy-hour-loading,
+html[data-theme='light'] .happy-hour-empty,
+html[data-theme='light'] .happy-hour-alert {
+  background: rgba(255, 255, 255, 0.6);
+  border-color: rgba(196, 167, 125, 0.3);
+  box-shadow: 0 18px 48px rgba(196, 167, 125, 0.1);
+}
+
+html[data-theme='light'] .countdown-block,
+html[data-theme='light'] .happy-hour-timing > div,
+html[data-theme='light'] .metric-card,
+html[data-theme='light'] .featured-price-row > div,
+html[data-theme='light'] .happy-product-prices > div {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(196, 167, 125, 0.2);
+}
+
+html[data-theme='light'] .happy-hour-primary {
+  color: #FFFFFF;
+}
+
+html[data-theme='light'] .featured-frame,
+html[data-theme='light'] .happy-product-image {
+  background: radial-gradient(circle at center, rgba(196, 167, 125, 0.05), transparent);
+}

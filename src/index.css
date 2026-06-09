@@ -33,13 +33,18 @@
 
 html[data-theme='light'] {
   --secondary: #FFFFFF;
-  --accent: #1A1A1A;
-  --text-main: #1A1A1A;
-  --text-muted: rgba(0, 0, 0, 0.6);
-  --bg-main: #FDFBF7;
+  --accent: #2A2520;
+  --text-main: #2A2520;
+  --text-muted: rgba(42, 37, 32, 0.65);
+  --bg-main: #FAEDE1; /* Subtly warmer, like Golden Hour */
   
-  --glass: rgba(0, 0, 0, 0.03);
-  --glass-border: rgba(0, 0, 0, 0.1);
+  --glass: rgba(255, 255, 255, 0.6); /* Frosted glass effect */
+  --glass-border: rgba(196, 167, 125, 0.2); /* Golden border for glass */
+}
+/* Adding an explicit gradient for the body in light mode */
+html[data-theme='light'] body {
+  background: radial-gradient(circle at top right, #FFFFFF 0%, #FAEDE1 100%);
+  background-attachment: fixed;
 }
 
 * {
@@ -120,17 +125,3 @@ html[data-theme='light'] .price-block {
   background: rgba(0, 0, 0, 0.02) !important;
 }
 
-html[data-theme='light'] .happy-hour-page,
-html[data-theme='light'] .black-friday-page {
-  --bg-main: #050505;
-  --secondary: #0d0d0d;
-  --text-main: #FFFFFF;
-  --text-muted: rgba(255, 255, 255, 0.7);
-  --glass: rgba(255, 255, 255, 0.03);
-  --glass-border: rgba(255, 255, 255, 0.1);
-}
-
-html[data-theme='light'] .happy-hour-page .promo-modal-overlay,
-html[data-theme='light'] .black-friday-page .promo-modal-overlay {
-  background: rgba(0, 0, 0, 0.85);
-}
