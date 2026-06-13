@@ -29,13 +29,17 @@ function App() {
   const handleNavigate = (to: 'home' | 'products' | 'happyhour' | 'blackfriday' | 'auth' | 'profile' | 'packs' | 'atelier', options?: { collectionId?: number, packId?: number }) => {
     // L'atelier est une page externe — on ouvre dans un nouvel onglet
     if (to === 'atelier') {
-      if (!isLoggedIn) {
-        // Non connecté → rediriger vers l'auth d'abord
-        handleNavigate('auth');
-        return;
+      // Ouvrir l'atelier dans un nouvel onglet avec les tokens dans l'URL pour le cross-domain
+      const token = localStorage.getItem('diwan_auth_token');
+      const user = localStorage.getItem('diwan_user_data');
+      let finalUrl = ATELIER_URL;
+      if (token && user) {
+        const urlObj = new URL(finalUrl);
+        urlObj.searchParams.set('token', token);
+        urlObj.searchParams.set('user', user);
+        finalUrl = urlObj.toString();
       }
-      // Ouvrir l'atelier dans un nouvel onglet (le token est dans localStorage, même origine)
-      window.open(ATELIER_URL, '_blank', 'noopener');
+      window.open(finalUrl, '_blank', 'noopener');
       return;
     }
 

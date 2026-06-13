@@ -327,7 +327,16 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ onBack, onLogout, onUpdateSuc
               if (onNavigateToAtelier) {
                 onNavigateToAtelier();
               } else {
-                window.open(ATELIER_URL, '_blank', 'noopener');
+                const token = localStorage.getItem('diwan_auth_token');
+                const user = localStorage.getItem('diwan_user_data');
+                let finalUrl = ATELIER_URL;
+                if (token && user) {
+                  const urlObj = new URL(finalUrl);
+                  urlObj.searchParams.set('token', token);
+                  urlObj.searchParams.set('user', user);
+                  finalUrl = urlObj.toString();
+                }
+                window.open(finalUrl, '_blank', 'noopener');
               }
             }}
           >
