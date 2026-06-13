@@ -17,7 +17,7 @@ interface CartItem {
 }
 
 interface NavbarProps {
-  onNavigate?: (to: 'home' | 'products' | 'happyhour' | 'blackfriday' | 'auth') => void
+  onNavigate?: (to: 'home' | 'products' | 'happyhour' | 'blackfriday' | 'auth' | 'atelier') => void
 }
 
 const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
@@ -502,6 +502,37 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
               <a href="/black-friday" className="nav-link" onClick={(e) => { e.preventDefault(); setIsOpen(false); onNavigate?.('blackfriday') }}>
                 <span className="link-num">04</span>
                 <span className="link-text">Black Friday</span>
+              </a>
+            </li>
+            <li className="nav-item nav-item--atelier">
+              <a
+                href="#"
+                className="nav-link nav-link--atelier"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setIsOpen(false);
+                  onNavigate?.('atelier');
+                }}
+              >
+                <span className="link-num">05</span>
+                <span className="link-text">
+                  Atelier 3D
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    style={{ marginLeft: '8px', verticalAlign: 'middle', opacity: 0.7 }}
+                  >
+                    <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                    <path d="M2 17l10 5 10-5"/>
+                    <path d="M2 12l10 5 10-5"/>
+                  </svg>
+                </span>
               </a>
             </li>
           </ul>

@@ -23,8 +23,23 @@ function App() {
   const [selectedPackId, setSelectedPackId] = useState<number | null>(null);
   const [selectedCollectionId, setSelectedCollectionId] = useState<number | null>(null);
 
-  const handleNavigate = (to: 'home' | 'products' | 'happyhour' | 'blackfriday' | 'auth' | 'profile' | 'packs', options?: { collectionId?: number, packId?: number }) => {
-    let target = to;
+  // URL de l'atelier 3D (tailleurUserFront, port 5174 en dev, ou sous-chemin nginx en prod)
+  const ATELIER_URL = import.meta.env.VITE_ATELIER_URL || 'http://localhost:5174';
+
+  const handleNavigate = (to: 'home' | 'products' | 'happyhour' | 'blackfriday' | 'auth' | 'profile' | 'packs' | 'atelier', options?: { collectionId?: number, packId?: number }) => {
+    // L'atelier est une page externe — on ouvre dans un nouvel onglet
+    if (to === 'atelier') {
+      if (!isLoggedIn) {
+        // Non connecté → rediriger vers l'auth d'abord
+        handleNavigate('auth');
+        return;
+      }
+      // Ouvrir l'atelier dans un nouvel onglet (le token est dans localStorage, même origine)
+      window.open(ATELIER_URL, '_blank', 'noopener');
+      return;
+    }
+
+    let target = to as 'home' | 'products' | 'happyhour' | 'blackfriday' | 'auth' | 'profile' | 'packs';
     if (to === 'auth' && isLoggedIn) {
       target = 'profile';
     }
@@ -104,7 +119,7 @@ function App() {
         ) : view === 'packs' ? (
           <PacksPage onBack={() => handleNavigate('home')} initialPackId={selectedPackId} />
         ) : (
-          <ProfilePage onBack={() => handleNavigate('home')} onLogout={handleLogout} />
+          <ProfilePage onBack={() => handleNavigate('home')} onLogout={handleLogout} onNavigateToAtelier={() => handleNavigate('atelier')} />
         )}
       </main>
       <CartNotification />
