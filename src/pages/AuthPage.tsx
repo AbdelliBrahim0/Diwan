@@ -116,6 +116,7 @@ const AuthPage: React.FC<AuthPageProps> = ({ onBack, onSuccess }) => {
       
       // Map backend fields to frontend fields for the ProfilePage
       onSuccess({
+        id: userData.id,
         firstName: userData.first_name,
         lastName: userData.last_name,
         email: userData.email,
