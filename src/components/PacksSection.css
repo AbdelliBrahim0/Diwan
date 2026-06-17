@@ -212,7 +212,6 @@ html[data-theme='light'] .museum-info-panel {
   gap: 8px;
   cursor: pointer;
   width: fit-content;
-  group: hover;
 }
 
 .cta-text {
@@ -374,11 +373,11 @@ html[data-theme='light'] .art-frame {
 
   .museum-art-piece {
     order: -1; /* Image on top */
-    height: 400px;
+    height: 500px;
   }
 
   .art-frame {
-    max-width: 320px;
+    max-width: 90%;
   }
 
   .museum-controls {
@@ -401,10 +400,10 @@ html[data-theme='light'] .art-frame {
   }
 
   .museum-art-piece {
-    height: 320px;
+    height: 450px;
   }
 
   .art-frame {
-    max-width: 260px;
+    max-width: 95%;
   }
 }
