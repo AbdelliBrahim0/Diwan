@@ -56,12 +56,30 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ onBack, onLogout, onUpdateSuc
         if (!userId) return;
 
         setLoadingMeasurements(true);
+
+        let firstViewId = null;
+        try {
+          const viewsRes = await fetch(`${TAILLEUR_API_URL}/api/views`);
+          if (viewsRes.ok) {
+            const viewsData = await viewsRes.json();
+            if (viewsData.data && viewsData.data.length > 0) {
+              firstViewId = viewsData.data[0].id;
+            }
+          }
+        } catch(e) {
+          console.error('Failed to fetch views:', e);
+        }
+
         const res = await fetch(`${TAILLEUR_API_URL}/api/measurements/${userId}`, {
           headers: { 'Authorization': `Bearer ${token}` },
         });
         if (res.ok) {
           const data = await res.json();
-          setMeasurements(data.data || []);
+          let userMeasurements = data.data || [];
+          if (firstViewId !== null) {
+            userMeasurements = userMeasurements.filter((m: any) => m.view_id !== firstViewId);
+          }
+          setMeasurements(userMeasurements);
         }
       } catch (err) {
         console.error('[PROFILE] Failed to fetch measurements:', err);
