@@ -14,6 +14,7 @@ interface CartItem {
   quantity: number;
   source?: string;
   originalPrice?: string | number;
+  details?: { id: number, name: string }[];
 }
 
 interface NavbarProps {
@@ -170,8 +171,15 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
       message += `   • Qté: ${item.quantity}\n`;
       message += `   • Type: ${typeLabel}\n`;
       message += `   • Provenance: ${sourceLabel}\n`;
-      message += `   • ID Produit: #${item.productId}\n`;
+      message += `   • ID (Produit/Pack): #${item.productId}\n`;
       message += `   • Prix: ${priceDisplay}\n`;
+
+      if (item.details && item.details.length > 0) {
+        message += `   • Inclus :\n`;
+        item.details.forEach(d => {
+          message += `      - ${d.name} (ID: #${d.id})\n`;
+        });
+      }
     });
 
     if (appliedPromo) {
@@ -216,7 +224,9 @@ const Navbar: React.FC<NavbarProps> = ({ onNavigate }) => {
         },
         body: JSON.stringify({
           items: cartItems.map(item => ({
-            product_id: item.productId,
+            product_id: item.source === 'Pack Custom' ? null : Number(item.productId),
+            pack_id: item.source === 'Pack Custom' ? Number(item.productId) : null,
+            details: item.details || null,
             quantity: item.quantity,
             type: item.type,
             source: item.source || 'catalogue',
