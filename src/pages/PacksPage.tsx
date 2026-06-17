@@ -102,12 +102,13 @@ const PacksPage: React.FC<PacksPageProps> = ({ onBack, initialPackId }) => {
     }
   }, [selectedPack]);
 
-  const handleProductToggle = (compIdx: number, productId: number, max: number) => {
+  const handleProductToggle = (compIdx: number, productId: number, comp: PackComponent) => {
     const current = selections[compIdx] || [];
     if (current.includes(productId)) {
       setSelections({ ...selections, [compIdx]: current.filter(id => id !== productId) });
     } else {
-      if (current.length < max) {
+      const isUnlimited = comp.type === 'category' || comp.type === 'collection';
+      if (isUnlimited || current.length < comp.quantity) {
         setSelections({ ...selections, [compIdx]: [...current, productId] });
       }
     }
@@ -116,6 +117,9 @@ const PacksPage: React.FC<PacksPageProps> = ({ onBack, initialPackId }) => {
   const isStepComplete = (idx: number) => {
     const comp = selectedPack?.components[idx];
     if (!comp) return false;
+    if (comp.type === 'category' || comp.type === 'collection') {
+      return (selections[idx]?.length || 0) >= 1;
+    }
     return (selections[idx]?.length || 0) === comp.quantity;
   };
 
@@ -262,7 +266,7 @@ const PacksPage: React.FC<PacksPageProps> = ({ onBack, initialPackId }) => {
               <div className="step-instruction">
                 <h2>
                   {currentComp?.type === 'product' ? 'Votre article inclus' : 
-                   `Choisissez ${currentComp?.quantity} article${currentComp?.quantity! > 1 ? 's' : ''}`}
+                   'Choisissez vos articles'}
                 </h2>
                 <p className="instruction-sub">
                   {currentComp?.type === 'product' ? 'Cet article est une pièce maîtresse fixe de votre pack.' : 
@@ -279,7 +283,7 @@ const PacksPage: React.FC<PacksPageProps> = ({ onBack, initialPackId }) => {
                     <motion.div 
                       key={product.id}
                       className={`selection-card ${isSelected ? 'selected' : ''} ${isFixed ? 'fixed' : ''}`}
-                      onClick={() => !isFixed && handleProductToggle(currentStep, product.id, currentComp?.quantity || 1)}
+                      onClick={() => !isFixed && handleProductToggle(currentStep, product.id, currentComp!)}
                       whileHover={!isFixed ? { y: -5 } : {}}
                     >
                       <div className="card-img-box">
