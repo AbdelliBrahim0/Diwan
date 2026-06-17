@@ -17,6 +17,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ onBack, onLogout, onUpdateSuc
   const [saving, setSaving] = useState(false);
   const [locating, setLocating] = useState(false);
   const [measurements, setMeasurements] = useState<any[]>([]);
+  const [allViews, setAllViews] = useState<any[]>([]);
   const [loadingMeasurements, setLoadingMeasurements] = useState(false);
   const TAILLEUR_API_URL = import.meta.env.VITE_TAILLEUR_API_URL || 'http://localhost:5001';
   const ATELIER_URL = import.meta.env.VITE_ATELIER_URL || 'http://localhost:5174';
@@ -58,11 +59,14 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ onBack, onLogout, onUpdateSuc
         setLoadingMeasurements(true);
 
         let firstViewId = null;
+        let fetchedViews: any[] = [];
         try {
           const viewsRes = await fetch(`${TAILLEUR_API_URL}/api/views`);
           if (viewsRes.ok) {
             const viewsData = await viewsRes.json();
             if (viewsData.data && viewsData.data.length > 0) {
+              fetchedViews = viewsData.data;
+              setAllViews(fetchedViews.slice(1));
               firstViewId = viewsData.data[0].id;
             }
           }
@@ -319,19 +323,33 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ onBack, onLogout, onUpdateSuc
           <div className="atelier-measurements">
             {loadingMeasurements ? (
               <p className="atelier-loading">Chargement des mesures...</p>
+            ) : allViews.length > 0 ? (
+              <>
+                <p className="atelier-measures-label">{measurements.length} mesure{measurements.length > 1 ? 's' : ''} enregistrée{measurements.length > 1 ? 's' : ''} sur {allViews.length}</p>
+                <ul className="atelier-measures-list">
+                  {allViews.map((v: any) => {
+                    const m = measurements.find((m: any) => m.view_id === v.id);
+                    return (
+                      <li key={v.id} className="atelier-measure-item">
+                        <span className="measure-name">{v.name}</span>
+                        <span className="measure-value">
+                          {m ? <>{m.value_cm} <em>cm</em></> : <em style={{opacity: 0.5}}>vide</em>}
+                        </span>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </>
             ) : measurements.length > 0 ? (
               <>
                 <p className="atelier-measures-label">{measurements.length} mesure{measurements.length > 1 ? 's' : ''} enregistrée{measurements.length > 1 ? 's' : ''}</p>
                 <ul className="atelier-measures-list">
-                  {measurements.slice(0, 5).map((m: any) => (
+                  {measurements.map((m: any) => (
                     <li key={m.id} className="atelier-measure-item">
                       <span className="measure-name">{m.view_name}</span>
                       <span className="measure-value">{m.value_cm} <em>cm</em></span>
                     </li>
                   ))}
-                  {measurements.length > 5 && (
-                    <li className="atelier-measure-more">+{measurements.length - 5} autres mesures</li>
-                  )}
                 </ul>
               </>
             ) : (
